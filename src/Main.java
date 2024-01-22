@@ -1,4 +1,3 @@
-import modelo.Autor;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
 import org.neodatis.odb.Objects;
@@ -43,7 +42,14 @@ public class Main {
     }
     public static void eliminar(String campo, String valor, Class clase){
         Objects resultado = buscar(campo,valor,clase);
-        if (resultado==null) System.out.println("No se ha encontrado ningún " + clase); return;
+        if (resultado==null) {System.out.println("No se ha encontrado ningún " + clase); return;}
+        if (resultado.size()>1){
+            especificarBorrado(resultado);
+        } else {
+            odb.delete(resultado.getFirst());
+        }
+    }
 
+    private static void especificarBorrado(Objects resultado) {
     }
 }

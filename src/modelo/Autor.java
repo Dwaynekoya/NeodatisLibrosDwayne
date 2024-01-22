@@ -1,5 +1,6 @@
 package modelo;
 
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 

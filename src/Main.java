@@ -1,6 +1,7 @@
 import controlador.ControlBBDD;
 import modelo.Autor;
 import modelo.Libro;
+import controlador.ControlBBDD;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
 import org.neodatis.odb.Objects;
@@ -18,7 +19,6 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Main {
-    private static ODB odb;
     public static void main(String[] args) {
         //Todo: USER LOGIN
         ControlBBDD controlBBDD = new ControlBBDD();
@@ -27,4 +27,7 @@ public class Main {
         //VISUALIZAR
         odb.close();
     }
+        controlBBDD.cerrarBBDD();
+    }
+
 }

@@ -113,7 +113,6 @@ public class ControlBBDD {
         List<Object> array=new ArrayList<>();
         while(resultado.hasNext()){
             Object siguiente=resultado.next();
-
         }
     }
 

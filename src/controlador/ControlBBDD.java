@@ -13,6 +13,8 @@ import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,7 +26,41 @@ public class ControlBBDD {
 
     public ControlBBDD() {
         odb = ODBFactory.open("EDITORIAL.ND");
+
     }
+
+    public void visualizarTodoConsola() {
+        Objects<Libro> libros = odb.getObjects(Libro.class);
+        Objects<Autor> autors = odb.getObjects(Autor.class);
+        while (libros.hasNext()){
+            Libro libro = libros.next();
+            System.out.printf("%s: %s %n", libro.getNombre(), libro.getAutor());
+        }
+        while (autors.hasNext()){
+            Autor autor = autors.next();
+            System.out.printf("%s, %s %n", autor.getApellidos(), autor.getNombre());
+        }
+    }
+
+    public void insertarDatosPrueba() throws ParseException {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        Autor autor1 = new Autor("George", "Orwell", false);
+        Autor autor2 = new Autor("Jane", "Austen", false);
+        Autor autor3 = new Autor("Rick", "Riordan", true);
+        Libro libro1 = new Libro("Orgullo y Prejuicio", "Distopico", format.parse("01/01/2000") , autor2);
+        Libro libro2 =new Libro("Emma", "Distopico", format.parse("01/01/2020") , autor2);
+        Libro[] libros = new  Libro[]{
+                new Libro("1984", "Distopico", format.parse("01/01/2000") , autor1),
+                libro1,libro2
+        };
+        autor2.getLibros().add(libro1); autor2.getLibros().add(libro2);
+        odb.store(autor1);odb.store(autor2);odb.store(autor3);
+        for (Libro libro:libros){
+            odb.store(libro);
+        }
+        odb.commit();
+    }
+
     public void cerrarBBDD(){
         odb.close();
     }
@@ -37,8 +73,7 @@ public class ControlBBDD {
      * @param clase
      * @return
      */
-    public static Objects buscar(String campo, String valor, Class clase){
-
+    public Objects buscar(String campo, String valor, Class clase){
         ICriterion criterion = Where.equal(campo,valor);
         IQuery query = new CriteriaQuery(clase, criterion);
         Objects autores = odb.getObjects(query);
@@ -56,7 +91,7 @@ public class ControlBBDD {
      * @param valor
      * @param clase
      */
-    public static void eliminar(String campo, String valor, Class clase){
+    public void eliminar(String campo, String valor, Class clase){
         Objects resultado = buscar(campo,valor,clase);
         if (resultado==null) {System.out.println("No se ha encontrado ningún " + clase); return;}
         if (resultado.size()>1){
@@ -65,6 +100,7 @@ public class ControlBBDD {
             //TODO: confirmación
             odb.delete(resultado.getFirst());
         }
+        odb.commit();
     }
 
     /**
@@ -83,7 +119,6 @@ public class ControlBBDD {
 
     public static void añadirLibro() throws IOException {
         BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
-        ODB odb= ODBFactory.open("EDITORIAL.ND");
         System.out.println("Introduce el nombre del libro");
         String nombre=teclado.readLine();
         System.out.println("Introduce el género");

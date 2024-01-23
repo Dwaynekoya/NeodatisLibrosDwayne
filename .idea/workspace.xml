@@ -4,12 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e451d51-142f-4bba-99d1-3aad9de2e7a3" name="Changes" comment="initial commit">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     <list default="true" id="1e451d51-142f-4bba-99d1-3aad9de2e7a3" name="Changes" comment="class">
+      <change afterPath="$PROJECT_DIR$/src/tests/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2024_14_20__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2024_14_20__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2024_14_21__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2024_14_21__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2024_14_25__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2024_14_25__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_01_2024_11_43__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_01_2024_11_43__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controlador/Consultas.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modelo/Autor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modelo/Autor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modelo/Libro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modelo/Libro.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +30,20 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Dwaynekoya&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="3a2e4429-7b93-4b15-bc1b-8acb04339b6e" />
+        <option name="url" value="https://github.com/Dwaynekoya/NeodatisLibrosDwayne.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -104,21 +123,36 @@
       <option name="project" value="LOCAL" />
       <updated>1705929904151</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
-    <option name="localTasksCounter" value="4" />
-    <task id="LOCAL-00005" summary="class">
+    <task id="LOCAL-00006" summary="class">
       <option name="closed" value="true" />
-      <created>1705929904151</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
+      <created>1706006554325</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1705929904151</updated>
+      <updated>1706006554325</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
+    <MESSAGE value="class" />
+    <option name="LAST_COMMIT_MESSAGE" value="class" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/controlador/ControlBBDD.java</url>
+          <line>76</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

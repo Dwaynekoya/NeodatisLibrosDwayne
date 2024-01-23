@@ -9,7 +9,13 @@ public class Libro {
     private String sinopsis;
     private Date fecha_lanzamiento;
     private Autor autor;
-
+    public Libro(String nombre, String genero, Date fecha_lanzamiento, Autor autor) {
+        this.nombre = nombre;
+        this.genero = genero;
+        this.sinopsis="";
+        this.fecha_lanzamiento = fecha_lanzamiento;
+        this.autor = autor;
+    }
     public Libro(String nombre, String genero, String sinopsis, Date fecha_lanzamiento, Autor autor) {
         this.nombre = nombre;
         this.genero = genero;

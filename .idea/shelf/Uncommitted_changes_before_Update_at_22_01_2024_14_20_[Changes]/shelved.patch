@@ -1,0 +1,145 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Main {\r\n    public static void main(String[] args) {\r\n        //USER LOGIN\r\n\r\n        //CONEXION BBDD\r\n\r\n        //INSERTAR DATOS PRUEBA\r\n\r\n        //VISUALIZAR\r\n\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision d5925cf1328184de87cfda4d328e7239e517997e)
++++ b/src/Main.java	(date 1705929608459)
+@@ -1,3 +1,21 @@
++import modelo.Autor;
++import modelo.Libro;
++import org.neodatis.odb.ODB;
++import org.neodatis.odb.ODBFactory;
++import org.neodatis.odb.Objects;
++import org.neodatis.odb.core.query.IQuery;
++import org.neodatis.odb.core.query.criteria.ICriterion;
++import org.neodatis.odb.core.query.criteria.Where;
++import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
++
++import java.io.BufferedReader;
++import java.io.IOException;
++import java.io.InputStreamReader;
++import java.time.Instant;
++import java.time.LocalDate;
++import java.time.LocalDateTime;
++import java.util.Date;
++
+ public class Main {
+     public static void main(String[] args) {
+         //USER LOGIN
+@@ -10,4 +28,52 @@
+ 
+     }
+ 
++    public static void añadirLibro() throws IOException {
++        BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
++        ODB odb= ODBFactory.open("EDITORIAL.ND");
++        System.out.println("Introduce el nombre del libro");
++        String nombre=teclado.readLine();
++        System.out.println("Introduce el género");
++        String genero=teclado.readLine();
++        System.out.println("Introduce la sinopsis");
++        String sinopsis= teclado.readLine();
++        Date fecha= Date.from(Instant.from(LocalDate.now())) ;
++        System.out.println("Introduce el autor");
++        String busqueda=teclado.readLine();
++
++        ICriterion criterioActualizado= Where.equal("nombre", busqueda);
++        IQuery queryActualizado=new CriteriaQuery(Autor.class, criterioActualizado);
++        Autor autor=(Autor) odb.getObjects(queryActualizado).getFirst();
++
++        Libro libro=new Libro(nombre, genero, sinopsis, fecha, autor);
++
++        odb.store(libro);
++    }
++
++    public static void añadirAutor() throws IOException {
++        BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
++        ODB odb= ODBFactory.open("EDITORIAL.ND");
++        System.out.println("Introduce el nombre del autor");
++        String nombre=teclado.readLine();
++        System.out.println("Introduce los apellidos del autor");
++        String apellidos=teclado.readLine();
++
++        Autor autor=new Autor(nombre, apellidos, true);
++
++        System.out.println("El autor se ha creado. ¿Deseas añadir libros? y=sí n=no");
++        String eleccion=teclado.readLine();
++
++        if(eleccion.equals("y")){
++            System.out.println("Introduce el título");
++        }
++
++        ICriterion criterioActualizado= Where.equal("nombre", busqueda);
++        IQuery queryActualizado=new CriteriaQuery(Autor.class, criterioActualizado);
++        Autor autor=(Autor) odb.getObjects(queryActualizado).getFirst();
++
++
++
++        odb.store(libro);
++    }
++
+ }
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_20\" default=\"true\" project-jdk-name=\"20\" project-jdk-type=\"JavaSDK\">\r\n    <output url=\"file://$PROJECT_DIR$/out\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision d5925cf1328184de87cfda4d328e7239e517997e)
++++ b/.idea/misc.xml	(date 1705928170324)
+@@ -1,4 +1,3 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_20" default="true" project-jdk-name="20" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"1e451d51-142f-4bba-99d1-3aad9de2e7a3\" name=\"Changes\" comment=\"initial commit\">\r\n      <change afterPath=\"$PROJECT_DIR$/src/libs/neodatis-odb-1.9.30.689.jar\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Main.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Main.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"ProjectColorInfo\"><![CDATA[{\r\n  \"associatedIndex\": 8\r\n}]]></component>\r\n  <component name=\"ProjectId\" id=\"2bJKGvRdCBUMYkBqAmA2wobdbrS\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"RunOnceActivity.OpenProjectViewOnStart\": \"true\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"git-widget-placeholder\": \"master\",\r\n    \"last_opened_file_path\": \"C:/Users/Prueba/IdeaProjects/NeodatisLibrosDwayne/src/libs/neodatis-odb-1.9.30.689.jar\",\r\n    \"project.structure.last.edited\": \"Libraries\",\r\n    \"project.structure.proportion\": \"0.0\",\r\n    \"project.structure.side.proportion\": \"0.0\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Prueba\\IdeaProjects\\NeodatisLibrosDwayne\\src\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\Prueba\\IdeaProjects\\NeodatisLibrosDwayne\\src\\modelo\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"1e451d51-142f-4bba-99d1-3aad9de2e7a3\" name=\"Changes\" comment=\"\" />\r\n      <created>1705927652085</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1705927652085</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"initial commit\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1705927863743</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1705927863743</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"initial commit\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1705927975579</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1705927975579</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"initial commit\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"initial commit\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision d5925cf1328184de87cfda4d328e7239e517997e)
++++ b/.idea/workspace.xml	(date 1705928949314)
+@@ -5,7 +5,8 @@
+   </component>
+   <component name="ChangeListManager">
+     <list default="true" id="1e451d51-142f-4bba-99d1-3aad9de2e7a3" name="Changes" comment="initial commit">
+-      <change afterPath="$PROJECT_DIR$/src/libs/neodatis-odb-1.9.30.689.jar" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -23,9 +24,9 @@
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+-  <component name="ProjectColorInfo"><![CDATA[{
+-  "associatedIndex": 8
+-}]]></component>
++  <component name="ProjectColorInfo">{
++  &quot;associatedIndex&quot;: 8
++}</component>
+   <component name="ProjectId" id="2bJKGvRdCBUMYkBqAmA2wobdbrS" />
+   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+   <component name="ProjectViewState">
+@@ -39,8 +40,8 @@
+     "git-widget-placeholder": "master",
+     "last_opened_file_path": "C:/Users/Prueba/IdeaProjects/NeodatisLibrosDwayne/src/libs/neodatis-odb-1.9.30.689.jar",
+     "project.structure.last.edited": "Libraries",
+-    "project.structure.proportion": "0.0",
+-    "project.structure.side.proportion": "0.0"
++    "project.structure.proportion": "0.15",
++    "project.structure.side.proportion": "0.2"
+   }
+ }]]></component>
+   <component name="RecentsManager">

@@ -1,0 +1,87 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class Main {\r\n    public static void main(String[] args) {\r\n        //USER LOGIN\r\n\r\n        //CONEXION BBDD\r\n\r\n        //INSERTAR DATOS PRUEBA\r\n\r\n        //VISUALIZAR\r\n\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	(revision d5925cf1328184de87cfda4d328e7239e517997e)
++++ b/src/Main.java	(date 1705929698884)
+@@ -1,3 +1,21 @@
++import modelo.Autor;
++import modelo.Libro;
++import org.neodatis.odb.ODB;
++import org.neodatis.odb.ODBFactory;
++import org.neodatis.odb.Objects;
++import org.neodatis.odb.core.query.IQuery;
++import org.neodatis.odb.core.query.criteria.ICriterion;
++import org.neodatis.odb.core.query.criteria.Where;
++import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
++
++import java.io.BufferedReader;
++import java.io.IOException;
++import java.io.InputStreamReader;
++import java.time.Instant;
++import java.time.LocalDate;
++import java.time.LocalDateTime;
++import java.util.Date;
++
+ public class Main {
+     public static void main(String[] args) {
+         //USER LOGIN
+@@ -10,4 +28,53 @@
+ 
+     }
+ 
++    public static void añadirLibro() throws IOException {
++        BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
++        ODB odb= ODBFactory.open("EDITORIAL.ND");
++        System.out.println("Introduce el nombre del libro");
++        String nombre=teclado.readLine();
++        System.out.println("Introduce el género");
++        String genero=teclado.readLine();
++        System.out.println("Introduce la sinopsis");
++        String sinopsis= teclado.readLine();
++        Date fecha= Date.from(Instant.from(LocalDate.now())) ;
++        System.out.println("Introduce el autor");
++        String busqueda=teclado.readLine();
++
++        ICriterion criterioActualizado= Where.equal("nombre", busqueda);
++        IQuery queryActualizado=new CriteriaQuery(Autor.class, criterioActualizado);
++        Autor autor=(Autor) odb.getObjects(queryActualizado).getFirst();
++
++        Libro libro=new Libro(nombre, genero, sinopsis, fecha, autor);
++
++        odb.store(libro);
++    }
++
++    public static void añadirAutor() throws IOException {
++        BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
++        ODB odb= ODBFactory.open("EDITORIAL.ND");
++        System.out.println("Introduce el nombre del autor");
++        String nombre=teclado.readLine();
++        System.out.println("Introduce los apellidos del autor");
++        String apellidos=teclado.readLine();
++
++        Autor autor=new Autor(nombre, apellidos, true);
++
++        System.out.println("El autor se ha creado. ¿Deseas añadir libros? y=sí n=no");
++        String eleccion=teclado.readLine();
++
++        if(eleccion.equals("y")){
++            System.out.println("Introduce el título");
++            
++        }
++
++        ICriterion criterioActualizado= Where.equal("nombre", busqueda);
++        IQuery queryActualizado=new CriteriaQuery(Autor.class, criterioActualizado);
++        Autor autor=(Autor) odb.getObjects(queryActualizado).getFirst();
++
++
++
++        odb.store(autor);
++    }
++
+ }
+\ No newline at end of file

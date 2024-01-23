@@ -22,14 +22,9 @@ import java.util.Date;
 import java.util.List;
 
 public class ControlBBDD {
-    private static ODB odb;
+    private static ODB odb = ODBFactory.open("EDITORIAL.ND");
 
-    public ControlBBDD() {
-        odb = ODBFactory.open("EDITORIAL.ND");
-
-    }
-
-    public void visualizarTodoConsola() {
+    public static void visualizarTodoConsola() {
         Objects<Libro> libros = odb.getObjects(Libro.class);
         Objects<Autor> autors = odb.getObjects(Autor.class);
         while (libros.hasNext()){
@@ -42,7 +37,7 @@ public class ControlBBDD {
         }
     }
 
-    public void insertarDatosPrueba() throws ParseException {
+    public static void insertarDatosPrueba() throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         Autor autor1 = new Autor("George", "Orwell", false);
         Autor autor2 = new Autor("Jane", "Austen", false);
@@ -61,7 +56,7 @@ public class ControlBBDD {
         odb.commit();
     }
 
-    public void cerrarBBDD(){
+    public static void cerrarBBDD(){
         odb.close();
     }
 
@@ -73,7 +68,7 @@ public class ControlBBDD {
      * @param clase
      * @return
      */
-    public Objects buscar(String campo, String valor, Class clase){
+    public static Objects buscar(String campo, String valor, Class clase){
         ICriterion criterion = Where.equal(campo,valor);
         IQuery query = new CriteriaQuery(clase, criterion);
         Objects autores = odb.getObjects(query);
@@ -91,7 +86,7 @@ public class ControlBBDD {
      * @param valor
      * @param clase
      */
-    public void eliminar(String campo, String valor, Class clase){
+    public static void eliminar(String campo, String valor, Class clase){
         Objects resultado = buscar(campo,valor,clase);
         if (resultado==null) {System.out.println("No se ha encontrado ningún " + clase); return;}
         if (resultado.size()>1){
@@ -109,7 +104,7 @@ public class ControlBBDD {
      * @param resultado
      */
     private static void especificarBorrado(Objects resultado) {
-        //TODO
+        //TODO (o quizá basta con controlar que no haya repetidos)
         List<Object> array=new ArrayList<>();
         while(resultado.hasNext()){
             Object siguiente=resultado.next();

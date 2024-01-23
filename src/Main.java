@@ -1,7 +1,7 @@
 import controlador.ControlBBDD;
-import modelo.Autor;
-import org.neodatis.odb.Objects;
+import javafx.application.Application;
 import tests.Test;
+import vista.Login;
 
 
 public class Main {
@@ -9,8 +9,7 @@ public class Main {
         //Todo: USER LOGIN
         ControlBBDD controlBBDD = new ControlBBDD();
         Test.test1(controlBBDD);
-        //LAST STEP: close db
-        controlBBDD.cerrarBBDD();
+        Application.launch(Login.class);
     }
 
 }

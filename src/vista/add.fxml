@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControlAdd">
+  <tabs>
+    <Tab text="Autor">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ButtonBar layoutX="400.0" layoutY="331.0" prefHeight="40.0" prefWidth="200.0">
+                    <buttons>
+                      <Button mnemonicParsing="false" onAction="#cerrarVentana" text="Cerrar" />
+                        <Button mnemonicParsing="false" onAction="#addAutor" text="Añadir" />
+                    </buttons>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </ButtonBar>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Libro">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <ButtonBar layoutX="400.0" layoutY="331.0" prefHeight="40.0" prefWidth="200.0">
+                    <buttons>
+                      <Button mnemonicParsing="false" onAction="#cerrarVentana" text="Cerrar" />
+                        <Button mnemonicParsing="false" onAction="#addLibro" text="Añadir" />
+                    </buttons>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </ButtonBar>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>

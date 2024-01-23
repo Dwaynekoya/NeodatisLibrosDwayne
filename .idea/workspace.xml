@@ -5,16 +5,72 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e451d51-142f-4bba-99d1-3aad9de2e7a3" name="Changes" comment="class">
-      <change afterPath="$PROJECT_DIR$/src/tests/Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/READeditconfigs.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controlador/ControlAdd.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controlador/ControlBuscar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controlador/ControlLogin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/controlador/ControlMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.base/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.base/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.base/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.controls/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.controls/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.controls/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.fxml/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.fxml/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.fxml/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.graphics/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.graphics/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.graphics/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.graphics/jpeg_fx.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.graphics/mesa3d.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.media/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.media/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.media/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.media/directshow.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.media/glib.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.media/gstreamer.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.media/libffi.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.swing/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.swing/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.swing/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.web/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.web/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.web/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.web/icu_web.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.web/libxml2.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.web/libxslt.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/legal/javafx.web/webkit.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/lib/javafx-swt.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/lib/javafx.base.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/lib/javafx.controls.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/lib/javafx.fxml.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/lib/javafx.graphics.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/lib/javafx.media.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/lib/javafx.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/lib/javafx.swing.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/lib/javafx.web.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/libs/javafx-sdk-21.0.1/src.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/vista/Add.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/vista/Buscar.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/vista/Login.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/vista/MainScreen.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/vista/add.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/vista/buscar.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/vista/login.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/vista/mainScreen.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2024_14_20__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2024_14_20__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2024_14_21__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2024_14_21__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2024_14_25__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_22_01_2024_14_25__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_01_2024_11_43__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_23_01_2024_11_43__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NeodatisLibrosDwayne.iml" beforeDir="false" afterPath="$PROJECT_DIR$/NeodatisLibrosDwayne.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modelo/Autor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modelo/Autor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modelo/Libro.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modelo/Libro.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vista/PantallaPrincipal.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,26 +80,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;Dwaynekoya&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="3a2e4429-7b93-4b15-bc1b-8acb04339b6e" />
-        <option name="url" value="https://github.com/Dwaynekoya/NeodatisLibrosDwayne.git" />
-      </UrlAndAccount>
-    </option>
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -60,10 +103,10 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Prueba/IdeaProjects/NeodatisLibrosDwayne/src/libs/neodatis-odb-1.9.30.689.jar&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Dwaynekoya/Documents/IdeaProjects/NeodatisLibrosDwayne/src/libs/javafx-sdk-21.0.1/lib&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -73,6 +116,16 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Prueba\IdeaProjects\NeodatisLibrosDwayne\src\modelo" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="NeodatisLibrosDwayne" />
+      <option name="PROGRAM_PARAMETERS" value="--module-path &quot;C:\Users\Dwaynekoya\Documents\IdeaProjects\NeodatisLibrosDwayne\src\libs\javafx-sdk-21.0.1\lib&quot; --add-modules=javafx.base,javafx.controls,javafx.graphics,javafx.media" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -115,44 +168,12 @@
       <option name="project" value="LOCAL" />
       <updated>1705929596114</updated>
     </task>
-    <task id="LOCAL-00005" summary="class">
-      <option name="closed" value="true" />
-      <created>1705929904151</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1705929904151</updated>
-    </task>
-    <task id="LOCAL-00006" summary="class">
-      <option name="closed" value="true" />
-      <created>1706006554325</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1706006554325</updated>
-    </task>
-    <option name="localTasksCounter" value="7" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="initial commit" />
     <MESSAGE value="class" />
     <option name="LAST_COMMIT_MESSAGE" value="class" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controlador/ControlBBDD.java</url>
-          <line>76</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>11</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

@@ -1,0 +1,19 @@
+From the run menu, select edit configurations. In the dialog that appears, you will see a field for VM options. You
+need to enter two options into this field with the following general form:
+
+--module-path %PATH_TO_FX%
+--add-modules=%FX_MODULES_NEEDED%
+Instead of %PATH_TO_FX%, include the actual path to the JavaFX SDK lib directory. The path syntax will depend on your
+operating system. For the example illustrated in the preceding steps, the first VM option would be:
+
+--module-path "C:\Program Files\Java\javafx-sdk-11.0.2\lib"
+The quote marks are necessary if you are using Windows since the name of one of the directories in the path contains a
+space.
+
+The JavaFX SDK is partitioned into seven modules. Include a comma-separated list of the ones your project will need in
+ place of %FX_MODULES_NEEDED%. For example:
+
+--add-modules=javafx.base,javafx.controls,javafx.graphics,javafx.media
+Later you can add other modules if you need to, or remove some, by editing your run configuration again.
+
+You can now run the application.

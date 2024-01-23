@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControlLogin">
+   <bottom>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <buttons>
+          <Button fx:id="buttonCrearUsuario" mnemonicParsing="false" onAction="#crearUser" text="Crear Usuario" />
+            <Button fx:id="butonIniciarSesion" mnemonicParsing="false" onAction="#iniciarSesion" text="Iniciar sesión" />
+        </buttons>
+         <padding>
+            <Insets bottom="10.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </ButtonBar>
+   </bottom>
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="71.0" layoutY="82.0" text="Usuario" />
+            <Label layoutX="52.0" layoutY="180.0" text="Contraseña" />
+            <TextField fx:id="textoUsuario" layoutX="131.0" layoutY="78.0" />
+            <PasswordField fx:id="textoContra" layoutX="131.0" layoutY="176.0" />
+         </children>
+      </Pane>
+   </center>
+</BorderPane>

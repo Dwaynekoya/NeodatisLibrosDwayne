@@ -1,6 +1,7 @@
 package vista;
 
 
+import controlador.ControlLogin;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -17,6 +18,7 @@ public class Login extends Application{
     public void start(Stage stage) throws Exception {
         launchLogin(stage);
         stage.show();
+
     }
 
     private void launchLogin(Stage stage) {

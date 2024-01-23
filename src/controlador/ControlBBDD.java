@@ -69,10 +69,17 @@ public class ControlBBDD {
      * @return
      */
     public static Objects buscar(String campo, String valor, Class clase){
-        ICriterion criterion = Where.equal(campo,valor);
-        IQuery query = new CriteriaQuery(clase, criterion);
-        Objects autores = odb.getObjects(query);
-        if (autores.size()==0){
+        Objects autores;
+        if (campo==null){
+            autores = odb.getObjects(clase);
+            System.out.println("Prueba");
+            System.out.println(autores);
+        }else {
+            ICriterion criterion = Where.equal(campo,valor);
+            IQuery query = new CriteriaQuery(clase, criterion);
+             autores = odb.getObjects(query);
+        }
+        if (autores.isEmpty()){
             return null;
         }
         else {

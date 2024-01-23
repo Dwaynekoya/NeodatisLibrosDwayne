@@ -36,9 +36,9 @@ public class ControlLogin {
         //for now:
         if (username.matches("admin")&& Arrays.equals(password, "admin".toCharArray())){
             openMainWindow(actionEvent);
-        }
+        } else {
         //TODO: mostrar mensaje: login incorrecto
-        System.out.println("LOGIN INCORRECTO");
+        System.out.println("LOGIN INCORRECTO");}
     }
 
     private void openMainWindow(ActionEvent actionEvent) {

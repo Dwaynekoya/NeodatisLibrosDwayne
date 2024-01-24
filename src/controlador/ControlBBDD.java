@@ -118,8 +118,8 @@ public class ControlBBDD {
         }
     }
 
-    public static void añadirLibro() throws IOException {
-        BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
+    public static void añadirLibro(Libro libro) {
+        /*BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Introduce el nombre del libro");
         String nombre=teclado.readLine();
         System.out.println("Introduce el género");
@@ -134,13 +134,13 @@ public class ControlBBDD {
         IQuery queryActualizado=new CriteriaQuery(Autor.class, criterioActualizado);
         Autor autor=(Autor) odb.getObjects(queryActualizado).getFirst();
 
-        Libro libro=new Libro(nombre, genero, sinopsis, fecha, autor);
-
+        Libro libro=new Libro(nombre, genero, sinopsis, fecha, autor);*/
         odb.store(libro);
+        odb.commit();
     }
 
-    public static void añadirAutor() throws IOException {
-        BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
+    public static void addAutor(Autor autor) {
+        /*BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
         ODB odb= ODBFactory.open("EDITORIAL.ND");
         System.out.println("Introduce el nombre del autor");
         String nombre=teclado.readLine();
@@ -155,6 +155,8 @@ public class ControlBBDD {
         if(eleccion.equals("y")){
             System.out.println("Introduce el título");
 
-        }
+        }*/
+        odb.store(autor);
+        odb.commit();
     }
 }

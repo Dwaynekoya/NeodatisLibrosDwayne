@@ -1,5 +1,6 @@
 package vista;
 
+import controlador.ControlBBDD;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,8 +10,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import modelo.Autor;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class Add extends Application {
     private Scene add;
@@ -27,9 +32,12 @@ public class Add extends Application {
     @FXML
     private TextArea txtSinopsis;
     @FXML
-    private Spinner spinnerFecha;
+    private DatePicker datePicker;
+//    private Spinner spinnerFecha;
     @FXML
     private ComboBox comboboxAutor;
+    private Label labelRellenarAutor;
+    private Label labelRellenarLibro;
 
     /**
      * Crea objeto de tipo Autor si todos los campos están llenos
@@ -38,16 +46,49 @@ public class Add extends Application {
      */
     public void addAutor(ActionEvent actionEvent) {
         String nombre = txtNombre.getText();
-
-        //TODO
+        String apellidos = txtApellidos.getText();
+        if (checkVacio(new String[]{nombre, apellidos})){
+            Autor autor = new Autor(nombre,apellidos, checkActivo.isSelected());
+            ControlBBDD.addAutor(autor);
+        }else {
+            labelRellenarAutor.setVisible(true);
+        }
     }
+
+    /**
+     * Comprueba que no haya campos vacíos.Devuelve falso si falla el check (hay campos vacios)
+     * @param campos
+     * @return
+     */
+    private boolean checkVacio(String[] campos) {
+        for (String campo: campos){
+            if (campo.isEmpty()) return false;
+        }
+        return true;
+    }
+
     /**
      * Crea objeto de tipo Libro si todos los campos están llenos
      * Inserta el objeto en la base de datos usando la clase ControlBBDD
      * @param actionEvent
      */
     public void addLibro(ActionEvent actionEvent) {
-        //todo
+        String titulo = txtTitulo.getText();
+        String genero = txtGenero.getText();
+        String sinopsis = txtSinopsis.getText();
+        if (checkVacio(new String[]{titulo,genero,sinopsis})){
+            Date  fechaLanzamiento;
+            LocalDate localDate = datePicker.getValue();
+            if (localDate != null) {
+                fechaLanzamiento = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            }
+            Autor selectedAutor = (Autor) comboboxAutor.getSelectionModel().getSelectedItem();
+            if (selectedAutor != null) {
+                //TODO
+            }
+        }else {
+            labelRellenarLibro.setVisible(true);
+        }
     }
     /**
      * Cierra la ventana cuando se pulsa el botón adecuado
@@ -71,6 +112,9 @@ public class Add extends Application {
             throw new RuntimeException(e);
         }
         add = new Scene(root);
+        //oculta las labels de advertencia hasta que sean necesarias
+        labelRellenarAutor.setVisible(false);
+        labelRellenarLibro.setVisible(false);
         stage.setScene(add);
     }
 }

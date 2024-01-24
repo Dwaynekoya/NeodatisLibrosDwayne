@@ -3,9 +3,9 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="vista.Add">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vista.Add">
   <tabs>
     <Tab text="Autor">
       <content>
@@ -25,6 +25,11 @@
                   <TextField fx:id="txtNombre" layoutX="280.0" layoutY="76.0" />
                   <TextField fx:id="txtApellidos" layoutX="281.0" layoutY="124.0" />
                   <CheckBox fx:id="checkActivo" layoutX="236.0" layoutY="177.0" mnemonicParsing="false" text="¿Es un autor activo?" />
+                  <VBox layoutX="27.0" layoutY="37.0" prefHeight="280.0" prefWidth="553.0" />
+                  <Label fx:id="labelRellenarAutpr" layoutX="293.0" layoutY="307.0" text="Comprueba que no dejas campos sin rellenar." textFill="#e41919">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
                </children></AnchorPane>
       </content>
     </Tab>
@@ -44,13 +49,18 @@
                   <Label layoutX="31.0" layoutY="47.0" text="´Título" />
                   <Label layoutX="23.0" layoutY="91.0" text="Género" />
                   <Label layoutX="21.0" layoutY="129.0" text="Sinopsis" />
-                  <Label layoutX="327.0" layoutY="47.0" text="Fecha lanzamiento" />
-                  <Label layoutX="388.0" layoutY="91.0" text="Autor" />
+                  <Label layoutX="316.0" layoutY="47.0" text="Fecha lanzamiento" />
+                  <Label layoutX="379.0" layoutY="91.0" text="Autor" />
                   <TextField fx:id="txtTitulo" layoutX="104.0" layoutY="43.0" />
                   <TextField fx:id="txtGenero" layoutX="105.0" layoutY="87.0" />
-                  <TextArea fx:id="txtSinopsis" layoutX="97.0" layoutY="129.0" prefHeight="200.0" prefWidth="200.0" />
-                  <Spinner fx:id="spinnerFecha" layoutX="428.0" layoutY="43.0" />
+                  <TextArea fx:id="txtSinopsis" layoutX="106.0" layoutY="129.0" prefHeight="160.0" prefWidth="149.0" />
                   <ComboBox fx:id="comboboxAutor" layoutX="428.0" layoutY="87.0" prefWidth="150.0" />
+                  <Label fx:id="labelRellenarLibro" layoutX="287.0" layoutY="309.0" text="Comprueba que no dejas campos sin rellenar." textFill="#e41919">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <DatePicker fx:id="datePicker" layoutX="427.0" layoutY="43.0" prefHeight="25.0" prefWidth="152.0" />
                </children></AnchorPane>
       </content>
     </Tab>

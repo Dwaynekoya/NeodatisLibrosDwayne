@@ -27,6 +27,7 @@ public class Buscar extends Application {
         }
         sceneBuscar = new Scene(root);
         stage.setScene(sceneBuscar);
+        stage.show();
     }
 
     /**

@@ -8,8 +8,8 @@ import vista.MainScreen;
 public class Main {
     private static boolean skipLogin = true;
     public static void main(String[] args) {
-        //Todo: USER LOGIN
-        ControlBBDD controlBBDD = new ControlBBDD();
+        //TODO: backups
+        //ControlBBDD controlBBDD = new ControlBBDD();
         //Test.test1(controlBBDD);
         if (skipLogin){
             Application.launch(MainScreen.class);

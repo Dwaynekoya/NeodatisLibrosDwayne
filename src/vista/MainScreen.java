@@ -30,6 +30,7 @@ public class MainScreen extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
+        stage.setTitle("Gestión editorial");
         stage.setOnCloseRequest(windowEvent -> cerrarBBDD());
         launchMain();
         stage.show();
@@ -121,8 +122,6 @@ public class MainScreen extends Application {
         if (seleccion instanceof Autor){
             showDetailsWindow((Autor) seleccion);
         }
-        // Open the details window with information about the selected item
-        showDetailsWindow(seleccion);
     }
 
     private void showDetailsWindow(Autor seleccion) {

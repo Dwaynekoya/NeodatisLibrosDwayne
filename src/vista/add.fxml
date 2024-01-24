@@ -4,11 +4,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controlador.ControlAdd">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="vista.Add">
   <tabs>
     <Tab text="Autor">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="268.0" prefWidth="600.0">
                <children>
                   <ButtonBar layoutX="400.0" layoutY="331.0" prefHeight="40.0" prefWidth="200.0">
                     <buttons>
@@ -19,6 +20,11 @@
                         <Insets right="10.0" />
                      </padding>
                   </ButtonBar>
+                  <Label layoutX="172.0" layoutY="80.0" text="Nombre" />
+                  <Label layoutX="169.0" layoutY="128.0" text="Apellidos" />
+                  <TextField fx:id="txtNombre" layoutX="280.0" layoutY="76.0" />
+                  <TextField fx:id="txtApellidos" layoutX="281.0" layoutY="124.0" />
+                  <CheckBox fx:id="checkActivo" layoutX="236.0" layoutY="177.0" mnemonicParsing="false" text="¿Es un autor activo?" />
                </children></AnchorPane>
       </content>
     </Tab>
@@ -35,6 +41,16 @@
                         <Insets right="10.0" />
                      </padding>
                   </ButtonBar>
+                  <Label layoutX="31.0" layoutY="47.0" text="´Título" />
+                  <Label layoutX="23.0" layoutY="91.0" text="Género" />
+                  <Label layoutX="21.0" layoutY="129.0" text="Sinopsis" />
+                  <Label layoutX="327.0" layoutY="47.0" text="Fecha lanzamiento" />
+                  <Label layoutX="388.0" layoutY="91.0" text="Autor" />
+                  <TextField fx:id="txtTitulo" layoutX="104.0" layoutY="43.0" />
+                  <TextField fx:id="txtGenero" layoutX="105.0" layoutY="87.0" />
+                  <TextArea fx:id="txtSinopsis" layoutX="97.0" layoutY="129.0" prefHeight="200.0" prefWidth="200.0" />
+                  <Spinner fx:id="spinnerFecha" layoutX="428.0" layoutY="43.0" />
+                  <ComboBox fx:id="comboboxAutor" layoutX="428.0" layoutY="87.0" prefWidth="150.0" />
                </children></AnchorPane>
       </content>
     </Tab>

@@ -1,12 +1,10 @@
 package vista;
 
 import controlador.ControlBBDD;
-import controlador.ControlDetalles;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -123,17 +121,17 @@ public class MainScreen extends Application {
     }
     //TODO: check whatever this does
 
-    private void showDetailsWindow(String selectedItemTitle) {
+    private void showDetailsWindow(Object selectedItem) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/detalles.fxml"));
             Scene scene = new Scene(loader.load());
 
-            ControlDetalles detailsController = loader.getController();
-            detailsController.setDetails(selectedItemTitle);
+            Detalles detailsController = loader.getController();
+            detailsController.setDetails(selectedItem);
 
             Stage detailsStage = new Stage();
             detailsStage.initModality(Modality.APPLICATION_MODAL);
-            detailsStage.setTitle("Details");
+            detailsStage.setTitle("Detalles");
             detailsStage.setScene(scene);
             detailsStage.show();
         } catch (IOException e) {
@@ -141,16 +139,8 @@ public class MainScreen extends Application {
         }
     }
 
-// ...
-
-    // Update the method that handles item selection in the ListView
     private void handleItemSelection(Object seleccion) {
-        if (seleccion instanceof Libro){
-            showDetailsWindow((Libro) seleccion);
-        }
-        if (seleccion instanceof Autor){
-            showDetailsWindow((Autor) seleccion);
-        }
+        showDetailsWindow(seleccion);
     }
 
     private void showDetailsWindow(Autor seleccion) {

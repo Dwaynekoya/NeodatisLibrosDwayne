@@ -7,7 +7,7 @@ import vista.MainScreen;
 
 
 public class Main {
-    private static boolean skipLogin = false;
+    private static boolean skipLogin = true;
     public static void main(String[] args) {
         //TODO: backups
         //ControlBBDD controlBBDD = new ControlBBDD();

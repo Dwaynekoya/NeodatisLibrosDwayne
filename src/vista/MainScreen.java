@@ -30,6 +30,7 @@ public class MainScreen extends Application {
     private Button btnVentanaAdd;
     @FXML
     private Button btnVentanaBuscar;
+    private Button btnRefrescar;
     private Stage stage;
 
     @Override
@@ -82,6 +83,10 @@ public class MainScreen extends Application {
         });
         btnVentanaBuscar.setOnAction(actionEvent -> {
             abrirVentana(new Buscar(listaAutores,listaLibros));
+        });
+        btnRefrescar.setOnAction(actionEvent -> {
+            llenarListaAutores();
+            llenarListaLibros();
         });
     }
 

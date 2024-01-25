@@ -2,6 +2,8 @@ package vista;
 
 import controlador.ControlBBDD;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import modelo.Autor;
 import modelo.Libro;
+import org.neodatis.odb.Objects;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -125,6 +128,9 @@ public class Add extends Application {
             System.out.println("Error asociando vista para añadir elementos");
             throw new RuntimeException(e);
         }
+        Objects<Autor> autores = ControlBBDD.buscar(null, null, Autor.class);
+        ObservableList<Autor> dataObservableList = FXCollections.observableArrayList(autores);
+        comboboxAutor.setItems(dataObservableList);
         add = new Scene(root);
         stage.setScene(add);
     }

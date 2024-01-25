@@ -10,9 +10,7 @@ import org.neodatis.odb.core.query.criteria.ICriterion;
 import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -159,4 +157,22 @@ public class ControlBBDD {
         odb.store(autor);
         odb.commit();
     }
+
+    public static void backup(){
+        try {
+            FileOutputStream backup = new FileOutputStream ("EDITORIAL_BACKUP.ND");
+            FileInputStream filein=new FileInputStream("EDITORIAL.ND");
+            int i;
+            while((i=filein.read())!=-1){
+                backup.write(i);
+            }
+            backup.close();
+            filein.close();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

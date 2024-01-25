@@ -13,14 +13,9 @@ import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class ControlBBDD {
-    private static ODB odb = ODBFactory.open("EDITORIAL.ND");
+    private static final ODB odb = ODBFactory.open("EDITORIAL.ND");
 
     public static void visualizarTodoConsola() {
         Objects<Libro> libros = odb.getObjects(Libro.class);
@@ -61,16 +56,15 @@ public class ControlBBDD {
     /***
      * Función que realiza consulta de búsqueda en BBDD Neodatis. Devuelve nulo si no hay resultados, u Objects con
      * los resultados
-     * @param campo
-     * @param valor
-     * @param clase
+     * @param campo: columna de la tabla
+     * @param valor: valor que buscar
+     * @param clase: clase del objeto, "tabla"
      * @return
      */
     public static Objects buscar(String campo, String valor, Class clase){
         Objects autores;
         if (campo==null){
             autores = odb.getObjects(clase);
-            System.out.println("Prueba");
             System.out.println(autores);
         }else {
             ICriterion criterion = Where.equal(campo,valor);
@@ -86,37 +80,34 @@ public class ControlBBDD {
     }
 
     /**
-     * Este método llama al de búsqueda para tomar el resultado y eliminarlo de la base de datos.
-     * @param campo
-     * @param valor
-     * @param clase
+     * Este método elimina el objeto recibido de la BD
      */
-    public static void eliminar(String campo, String valor, Class clase){
-        Objects resultado = buscar(campo,valor,clase);
+    public static void eliminar(Object object){
+        /*Objects resultado = buscar(campo,valor,clase);
         if (resultado==null) {System.out.println("No se ha encontrado ningún " + clase); return;}
         if (resultado.size()>1){
             especificarBorrado(resultado);
         } else {
             //TODO: confirmación
             odb.delete(resultado.getFirst());
-        }
+        }*/
+        odb.delete(object);
         odb.commit();
     }
 
     /**
      * Este método es llamado cuando el resultado de una búsqueda es mayor a uno y se necesita especificar qué elemento
      * borrar
-     * @param resultado
      */
-    private static void especificarBorrado(Objects resultado) {
+    /*private static void especificarBorrado(Objects resultado) {
         //TODO (o quizá basta con controlar que no haya repetidos)
         List<Object> array=new ArrayList<>();
         while(resultado.hasNext()){
             Object siguiente=resultado.next();
         }
-    }
+    }*/
 
-    public static void añadirLibro(Libro libro) {
+    public static void addLibro(Libro libro) {
         /*BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Introduce el nombre del libro");
         String nombre=teclado.readLine();

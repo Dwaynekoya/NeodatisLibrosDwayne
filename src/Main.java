@@ -7,11 +7,11 @@ import vista.MainScreen;
 
 
 public class Main {
-    private static boolean skipLogin = true;
+    private static boolean skipLogin = false;
     public static void main(String[] args) {
         //TODO: backups
-        ControlBBDD controlBBDD = new ControlBBDD();
-        controlBBDD.backup();
+        //ControlBBDD controlBBDD = new ControlBBDD();
+        //controlBBDD.backup(); The process cannot access the file because another process has locked a portion of the file
         //Test.test1(controlBBDD);
         if (skipLogin){
             Application.launch(MainScreen.class);

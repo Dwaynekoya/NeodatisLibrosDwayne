@@ -41,7 +41,7 @@
                </children></AnchorPane>
       </content>
     </Tab>
-    <Tab text="Libro">
+    <Tab onSelectionChanged="#fillCombobox" text="Libro">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>

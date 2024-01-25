@@ -30,6 +30,7 @@ public class MainScreen extends Application {
     private Button btnVentanaAdd;
     @FXML
     private Button btnVentanaBuscar;
+    @FXML
     private Button btnRefrescar;
     private Stage stage;
 
@@ -79,10 +80,10 @@ public class MainScreen extends Application {
 
     private void funcionamientoButtons() {
         btnVentanaAdd.setOnAction(actionEvent -> {
-           abrirVentana(new Add(listaAutores,listaLibros));
+           abrirVentana(new Add());
         });
         btnVentanaBuscar.setOnAction(actionEvent -> {
-            abrirVentana(new Buscar(listaAutores,listaLibros));
+            abrirVentana(new Buscar());
         });
         btnRefrescar.setOnAction(actionEvent -> {
             llenarListaAutores();
@@ -124,7 +125,7 @@ public class MainScreen extends Application {
 
     private void showDetailsWindow(String selectedItemTitle) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/details.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/detalles.fxml"));
             Scene scene = new Scene(loader.load());
 
             ControlDetalles detailsController = loader.getController();

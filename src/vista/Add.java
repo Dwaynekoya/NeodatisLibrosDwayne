@@ -2,6 +2,7 @@ package vista;
 
 import controlador.ControlBBDD;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,9 +23,6 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class Add extends Application {
-    private final ListView<Libro> listaLibros;
-    private final ListView<Autor> listaAutores;
-    private Scene add;
     @FXML
     private TextField txtNombre;
     @FXML
@@ -46,10 +44,6 @@ public class Add extends Application {
     @FXML
     private Label labelRellenarLibro;
 
-    public Add(ListView<Autor> listaAutores, ListView<Libro> listaLibros) {
-        this.listaAutores=listaAutores;
-        this.listaLibros=listaLibros;
-    }
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -67,7 +61,7 @@ public class Add extends Application {
         if (checkVacio(new String[]{nombre, apellidos})){
             Autor autor = new Autor(nombre,apellidos, checkActivo.isSelected());
             ControlBBDD.addAutor(autor);
-            listaAutores.refresh();
+            //listaAutores.refresh();
         }else {
             labelRellenarAutor.setVisible(true);
         }
@@ -100,8 +94,8 @@ public class Add extends Application {
             Autor selectedAutor = (Autor) comboboxAutor.getSelectionModel().getSelectedItem();
             if (localDate != null && selectedAutor != null) {
                 fechaLanzamiento = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                ControlBBDD.añadirLibro(new Libro(titulo,genero,fechaLanzamiento,selectedAutor));
-                listaLibros.refresh();
+                ControlBBDD.addLibro(new Libro(titulo,genero,fechaLanzamiento,selectedAutor));
+                //listaLibros.refresh();
                 return;
             }
         } //si falta algún campo se muestra label:
@@ -128,10 +122,16 @@ public class Add extends Application {
             System.out.println("Error asociando vista para añadir elementos");
             throw new RuntimeException(e);
         }
-        Objects<Autor> autores = ControlBBDD.buscar(null, null, Autor.class);
-        ObservableList<Autor> dataObservableList = FXCollections.observableArrayList(autores);
-        comboboxAutor.setItems(dataObservableList);
-        add = new Scene(root);
+        Scene add = new Scene(root);
         stage.setScene(add);
+//        fillCombobox();
+    }
+
+    @FXML
+    private void fillCombobox() {
+        Objects<Autor> autores = ControlBBDD.buscar(null, null, Autor.class);
+        assert autores != null;
+        ObservableList<Autor> dataObservableList = FXCollections.observableArrayList(autores);
+        Platform.runLater(()-> comboboxAutor.setItems(dataObservableList));
     }
 }

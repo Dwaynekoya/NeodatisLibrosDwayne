@@ -18,7 +18,7 @@ public class Test {
         Autor jane = (Autor) autores.getFirst();
         System.out.printf("Encontrado: %s %n", jane);
         System.out.printf("Borrando... %n");
-        controlBBDD.eliminar("nombre", "Rick", Autor.class);
+        //controlBBDD.eliminar("nombre", "Rick", Autor.class);
         controlBBDD.visualizarTodoConsola();
     }
 }

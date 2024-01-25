@@ -23,10 +23,6 @@ public class Buscar extends Application {
     private Scene sceneBuscar;
     private ListView<Autor> listaAutores; private ListView<Libro> listaLibros;
 
-    public Buscar(ListView<Autor> listaAutores, ListView<Libro> listaLibros) {
-        this.listaAutores=listaAutores;
-        this.listaLibros=listaLibros;
-    }
 
     @Override
     public void start(Stage stage) throws Exception {

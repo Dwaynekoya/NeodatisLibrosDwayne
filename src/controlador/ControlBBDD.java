@@ -174,5 +174,4 @@ public class ControlBBDD {
             throw new RuntimeException(e);
         }
     }
-
 }

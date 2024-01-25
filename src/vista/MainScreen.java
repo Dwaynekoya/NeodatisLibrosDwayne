@@ -6,10 +6,12 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -24,7 +26,10 @@ public class MainScreen extends Application {
     private ListView<Autor> listaAutores;
     @FXML
     private ListView<Libro> listaLibros;
-
+    @FXML
+    private Button btnVentanaAdd;
+    @FXML
+    private Button btnVentanaBuscar;
     private Stage stage;
 
     @Override
@@ -57,16 +62,34 @@ public class MainScreen extends Application {
     private void launchMain() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/mainscreen.fxml"));
-            loader.setController(this);  // Set the controller to this instance
+            loader.setController(this);  // Asigna el controlador aquí en lugar de en el fxml. Necesario para listas
             Parent root = loader.load();
 
             Scene mainScreen = new Scene(root);
             stage.setScene(mainScreen);
 
-            // Call the method to fill the lists after loading the FXML
             fillLists();
+            funcionamientoButtons();
         } catch (IOException e) {
             System.out.println("Error asociando vista principal a la pantalla.");
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void funcionamientoButtons() {
+        btnVentanaAdd.setOnAction(actionEvent -> {
+           abrirVentana(new Add(listaAutores,listaLibros));
+        });
+        btnVentanaBuscar.setOnAction(actionEvent -> {
+            abrirVentana(new Buscar(listaAutores,listaLibros));
+        });
+    }
+
+    private void abrirVentana(Application window) {
+        try {
+            window.start(new Stage());
+        } catch (Exception e) {
+            System.out.println("Error creando ventana " + window.getClass());
             throw new RuntimeException(e);
         }
     }

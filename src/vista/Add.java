@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import modelo.Autor;
+import modelo.Libro;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -18,6 +19,8 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class Add extends Application {
+    private final ListView<Libro> listaLibros;
+    private final ListView<Autor> listaAutores;
     private Scene add;
     @FXML
     private TextField txtNombre;
@@ -33,12 +36,23 @@ public class Add extends Application {
     private TextArea txtSinopsis;
     @FXML
     private DatePicker datePicker;
-//    private Spinner spinnerFecha;
     @FXML
     private ComboBox comboboxAutor;
+    @FXML
     private Label labelRellenarAutor;
+    @FXML
     private Label labelRellenarLibro;
 
+    public Add(ListView<Autor> listaAutores, ListView<Libro> listaLibros) {
+        this.listaAutores=listaAutores;
+        this.listaLibros=listaLibros;
+    }
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        launchAdd(stage);
+        stage.show();
+    }
     /**
      * Crea objeto de tipo Autor si todos los campos están llenos
      * Inserta el objeto en la base de datos usando la clase ControlBBDD
@@ -50,6 +64,7 @@ public class Add extends Application {
         if (checkVacio(new String[]{nombre, apellidos})){
             Autor autor = new Autor(nombre,apellidos, checkActivo.isSelected());
             ControlBBDD.addAutor(autor);
+            listaAutores.refresh();
         }else {
             labelRellenarAutor.setVisible(true);
         }
@@ -79,16 +94,16 @@ public class Add extends Application {
         if (checkVacio(new String[]{titulo,genero,sinopsis})){
             Date  fechaLanzamiento;
             LocalDate localDate = datePicker.getValue();
-            if (localDate != null) {
-                fechaLanzamiento = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            }
             Autor selectedAutor = (Autor) comboboxAutor.getSelectionModel().getSelectedItem();
-            if (selectedAutor != null) {
-                //TODO
+            if (localDate != null && selectedAutor != null) {
+                fechaLanzamiento = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                ControlBBDD.añadirLibro(new Libro(titulo,genero,fechaLanzamiento,selectedAutor));
+                listaLibros.refresh();
+                return;
             }
-        }else {
-            labelRellenarLibro.setVisible(true);
-        }
+        } //si falta algún campo se muestra label:
+        labelRellenarLibro.setVisible(true);
+
     }
     /**
      * Cierra la ventana cuando se pulsa el botón adecuado
@@ -98,11 +113,10 @@ public class Add extends Application {
         ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        launchAdd(stage);
-    }
-
+    /**
+     * Asigna la vista fxml al Stage creando una escena
+     * @param stage
+     */
     private void launchAdd(Stage stage) {
         Parent root;
         try {
@@ -112,9 +126,6 @@ public class Add extends Application {
             throw new RuntimeException(e);
         }
         add = new Scene(root);
-        //oculta las labels de advertencia hasta que sean necesarias
-        labelRellenarAutor.setVisible(false);
-        labelRellenarLibro.setVisible(false);
         stage.setScene(add);
     }
 }

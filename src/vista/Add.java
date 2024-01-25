@@ -43,6 +43,10 @@ public class Add extends Application {
     private Label labelRellenarAutor;
     @FXML
     private Label labelRellenarLibro;
+    @FXML
+    private Label labelDuplicadoAutor;
+    @FXML
+    private Label labelDuplicadoLibro;
 
 
     @Override
@@ -60,11 +64,15 @@ public class Add extends Application {
         String apellidos = txtApellidos.getText();
         if (checkVacio(new String[]{nombre, apellidos})){
             Autor autor = new Autor(nombre,apellidos, checkActivo.isSelected());
-            ControlBBDD.addAutor(autor);
+            boolean added = ControlBBDD.addObject(autor);
             //listaAutores.refresh();
+            if (!added) {
+                labelDuplicadoAutor.setVisible(true);
+            }
         }else {
             labelRellenarAutor.setVisible(true);
         }
+
     }
 
     /**
@@ -94,12 +102,14 @@ public class Add extends Application {
             Autor selectedAutor = (Autor) comboboxAutor.getSelectionModel().getSelectedItem();
             if (localDate != null && selectedAutor != null) {
                 fechaLanzamiento = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                ControlBBDD.addLibro(new Libro(titulo,genero,fechaLanzamiento,selectedAutor));
-                //listaLibros.refresh();
-                return;
+                boolean added = ControlBBDD.addObject(new Libro(titulo,genero,fechaLanzamiento,selectedAutor));
+                if (!added) labelDuplicadoLibro.setVisible(true);
             }
-        } //si falta algún campo se muestra label:
-        labelRellenarLibro.setVisible(true);
+        } else {
+            //si falta algún campo se muestra label:
+            labelRellenarLibro.setVisible(true);
+        }
+
 
     }
     /**

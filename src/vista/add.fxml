@@ -38,6 +38,11 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Label>
+                  <Label fx:id="labelDuplicadoAutor" layoutX="181.0" layoutY="209.0" text="Ya existe un autor bajo ese nombre." textFill="#e41919" visible="false">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
       </content>
     </Tab>
@@ -69,6 +74,11 @@
                      </font>
                   </Label>
                   <DatePicker fx:id="datePicker" layoutX="427.0" layoutY="43.0" prefHeight="25.0" prefWidth="152.0" />
+                  <Label fx:id="labelDuplicadoLibro" layoutX="317.0" layoutY="136.0" prefHeight="132.0" prefWidth="265.0" text="Ya existe un libro de ese autor bajo este nombre" textFill="#e41919" visible="false" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
       </content>
     </Tab>

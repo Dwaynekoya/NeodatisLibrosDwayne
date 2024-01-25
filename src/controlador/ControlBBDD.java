@@ -1,7 +1,10 @@
 package controlador;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import modelo.Autor;
 import modelo.Libro;
+import modelo.Usuario;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
 import org.neodatis.odb.Objects;
@@ -13,6 +16,7 @@ import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 public class ControlBBDD {
     private static final ODB odb = ODBFactory.open("EDITORIAL.ND");
@@ -20,10 +24,12 @@ public class ControlBBDD {
     public static void visualizarTodoConsola() {
         Objects<Libro> libros = odb.getObjects(Libro.class);
         Objects<Autor> autors = odb.getObjects(Autor.class);
+        System.out.println("---LIBROS---");
         while (libros.hasNext()){
             Libro libro = libros.next();
             System.out.printf("%s: %s %n", libro.getNombre(), libro.getAutor());
         }
+        System.out.println("---AUTORES---");
         while (autors.hasNext()){
             Autor autor = autors.next();
             System.out.printf("%s, %s %n", autor.getApellidos(), autor.getNombre());
@@ -62,20 +68,48 @@ public class ControlBBDD {
      * @return
      */
     public static Objects buscar(String campo, String valor, Class clase){
-        Objects autores;
+        Objects resultado;
         if (campo==null){
-            autores = odb.getObjects(clase);
-            System.out.println(autores);
+            resultado = odb.getObjects(clase);
+            System.out.println(resultado);
         }else {
             ICriterion criterion = Where.equal(campo,valor);
             IQuery query = new CriteriaQuery(clase, criterion);
-             autores = odb.getObjects(query);
+             resultado = odb.getObjects(query);
         }
-        if (autores.isEmpty()){
+        if (resultado.isEmpty()){
             return null;
         }
         else {
-            return autores;
+            return resultado;
+        }
+    }
+    public static Objects busquedaCompleja(Class clase, String[] campos, String[] valores) {
+
+        ODB odb= ODBFactory.open("neodatis.test");
+        Objects resultado;
+
+        if (campos == null || campos.length == 0 || valores == null || valores.length == 0 || campos.length != valores.length) {
+            throw new IllegalArgumentException("Campos y valores deben ser no nulos y tener la misma longitud.");
+        }
+
+        ICriterion[] criterios = new ICriterion[campos.length];
+        for (int i = 0; i < campos.length; i++) {
+            criterios[i] = Where.equal(campos[i], valores[i]);
+        }
+
+        ICriterion criterio = criterios[0];
+        for (int i = 1; i < criterios.length; i++) {
+            criterio = Where.and().add(criterio).add(criterios[i]);
+        }
+
+        IQuery query=new CriteriaQuery(clase, criterio);
+        resultado=odb.getObjects(clase);
+
+        if (resultado.isEmpty()) {
+            return null;
+        } else {
+            return resultado;
         }
     }
 
@@ -88,7 +122,6 @@ public class ControlBBDD {
         if (resultado.size()>1){
             especificarBorrado(resultado);
         } else {
-            //TODO: confirmación
             odb.delete(resultado.getFirst());
         }*/
         odb.delete(object);
@@ -98,16 +131,22 @@ public class ControlBBDD {
     /**
      * Este método es llamado cuando el resultado de una búsqueda es mayor a uno y se necesita especificar qué elemento
      * borrar
+     *
+     * @return
      */
     /*private static void especificarBorrado(Objects resultado) {
-        //TODO (o quizá basta con controlar que no haya repetidos)
         List<Object> array=new ArrayList<>();
         while(resultado.hasNext()){
             Object siguiente=resultado.next();
         }
     }*/
 
-    public static void addLibro(Libro libro) {
+    /**
+     * Método que añade un objeto a la base de datos. Comprueba que el objeto no haya sido introducido anteriormente
+     * @param object: objeto para guardar, puede pertenecer a la clase Libro, Usuario o Autor
+     * @return
+     */
+    public static boolean addObject(Object object) {
         /*BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Introduce el nombre del libro");
         String nombre=teclado.readLine();
@@ -124,11 +163,23 @@ public class ControlBBDD {
         Autor autor=(Autor) odb.getObjects(queryActualizado).getFirst();
 
         Libro libro=new Libro(nombre, genero, sinopsis, fecha, autor);*/
-        odb.store(libro);
+        Objects duplicado = null;
+        if (object instanceof Libro){
+             duplicado = buscar("nombre", ((Libro) object).getNombre(), Libro.class);
+        }
+        if (object instanceof Autor){
+            duplicado = buscar("nombre", ((Autor) object).getNombre(), Autor.class);
+        }
+        if (object instanceof Usuario){
+            duplicado=buscar("nombreUsuario",((Usuario) object).getNombreUsuario(), Usuario.class);
+        }
+        if (!(duplicado ==null) && !(duplicado.isEmpty())) return false;
+        odb.store(object);
         odb.commit();
+        return true;
     }
 
-    public static void addAutor(Autor autor) {
+    /*public static void addAutor(Autor autor) {
         /*BufferedReader teclado=new BufferedReader(new InputStreamReader(System.in));
         ODB odb= ODBFactory.open("EDITORIAL.ND");
         System.out.println("Introduce el nombre del autor");
@@ -144,14 +195,12 @@ public class ControlBBDD {
         if(eleccion.equals("y")){
             System.out.println("Introduce el título");
 
-        }*/
-        odb.store(autor);
-        odb.commit();
-    }
+        }
+    }*/
 
     public static void backup(){
         try {
-            FileOutputStream backup = new FileOutputStream ("EDITORIAL_BACKUP.ND");
+            FileOutputStream backup = new FileOutputStream ("EDITORIAL_BACKUP"+ LocalDate.now() +".ND");
             FileInputStream filein=new FileInputStream("EDITORIAL.ND");
             int i;
             while((i=filein.read())!=-1){
@@ -164,5 +213,9 @@ public class ControlBBDD {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public static ObservableList generarLista(Class aClass){
+        Objects autores = buscar(null, null, aClass);
+        return FXCollections.observableArrayList(autores);
     }
 }

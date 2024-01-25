@@ -5,14 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e451d51-142f-4bba-99d1-3aad9de2e7a3" name="Changes" comment="home">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/EDITORIAL.ND" beforeDir="false" afterPath="$PROJECT_DIR$/EDITORIAL.ND" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controlador/ControlDetalles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vista/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/Add.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/Detalles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/Detalles.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/MainScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vista/buscar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/buscar.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vista/add.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/add.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/detalles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/detalles.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/usuarios.ND" beforeDir="false" afterPath="$PROJECT_DIR$/usuarios.ND" afterDir="false" />
     </list>
@@ -103,7 +103,7 @@
       <updated>1705927652085</updated>
       <workItem from="1706091313917" duration="4475000" />
       <workItem from="1706101422926" duration="1352000" />
-      <workItem from="1706196434984" duration="2715000" />
+      <workItem from="1706196434984" duration="10233000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -169,7 +169,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706186296322</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="home">
+      <option name="closed" value="true" />
+      <created>1706207115773</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1706207115773</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,21 +188,5 @@
     <MESSAGE value="class" />
     <MESSAGE value="home" />
     <option name="LAST_COMMIT_MESSAGE" value="home" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/vista/MainScreen.java</url>
-          <line>101</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/vista/MainScreen.java</url>
-          <line>51</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

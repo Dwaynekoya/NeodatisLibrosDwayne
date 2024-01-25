@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TabPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Autor;
@@ -32,6 +33,7 @@ public class MainScreen extends Application {
     private Button btnRefrescar;
     private Stage stage;
 
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
@@ -39,20 +41,6 @@ public class MainScreen extends Application {
         stage.setOnCloseRequest(windowEvent -> cerrarBBDD());
         launchMain();
         stage.show();
-    }
-
-    private void llenarListaLibros() {
-        Objects<Libro> libros = ControlBBDD.buscar(null, null, Libro.class);
-        ObservableList<Libro> dataObservableList = FXCollections.observableArrayList(libros);
-        // Update the UI on the JavaFX Application Thread
-        Platform.runLater(() -> listaLibros.setItems(dataObservableList));
-    }
-
-    public void llenarListaAutores() {
-        Objects<Autor> autores = ControlBBDD.buscar(null, null, Autor.class);
-        ObservableList<Autor> dataObservableList = FXCollections.observableArrayList(autores);
-        // Update the UI on the JavaFX Application Thread
-        Platform.runLater(() -> listaAutores.setItems(dataObservableList));
     }
 
     private void cerrarBBDD() {
@@ -84,8 +72,7 @@ public class MainScreen extends Application {
             abrirVentana(new Buscar());
         });
         btnRefrescar.setOnAction(actionEvent -> {
-            llenarListaAutores();
-            llenarListaLibros();
+            fillLists();
         });
     }
 
@@ -99,9 +86,9 @@ public class MainScreen extends Application {
     }
 
     private void fillLists() {
-        llenarListaAutores();
-        llenarListaLibros();
-        ControlBBDD.visualizarTodoConsola();
+        Platform.runLater(() -> listaAutores.setItems(ControlBBDD.generarLista(Autor.class)));
+        Platform.runLater(() -> listaLibros.setItems(ControlBBDD.generarLista(Libro.class)));
+        //ControlBBDD.visualizarTodoConsola();
         listaAutores.setOnMouseClicked(event -> handleAutorSelection());
         listaLibros.setOnMouseClicked(event -> handleLibroSelection());
     }
@@ -114,7 +101,7 @@ public class MainScreen extends Application {
     }
 
     private void handleAutorSelection() {
-        Autor selectedAutor = (Autor) listaAutores.getSelectionModel().getSelectedItem();
+        Autor selectedAutor = listaAutores.getSelectionModel().getSelectedItem();
         if (selectedAutor != null) {
             handleItemSelection(selectedAutor);
         }

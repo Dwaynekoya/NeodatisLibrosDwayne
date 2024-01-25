@@ -1,3 +1,5 @@
+package vista;
+
 import controlador.ControlBBDD;
 import javafx.application.Application;
 import tests.Test;

@@ -92,9 +92,7 @@ public class Detalles extends Application {
         txtSinopsis.setText(libro.getSinopsis());
         datePicker.setValue(libro.getFecha_lanzamiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         comboboxAutor.getSelectionModel().select(libro.getAutor());
-        Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservable(
-                ControlBBDD.buscar(null, null, Autor.class)
-        )));
+        Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservableAutores()));
     }
 
     private void mostrarDetalles(Autor autor) {

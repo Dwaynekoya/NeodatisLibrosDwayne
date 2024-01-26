@@ -5,16 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e451d51-142f-4bba-99d1-3aad9de2e7a3" name="Changes" comment="home">
-      <change afterPath="$PROJECT_DIR$/src/tests/TestBusquedaAutor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tests/TestBusquedaFecha.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EDITORIAL.ND" beforeDir="false" afterPath="$PROJECT_DIR$/EDITORIAL.ND" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/Add.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/Buscar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/Buscar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/Detalles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/Detalles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vista/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/MainScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vista/mainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/mainScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +26,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="bug" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -107,6 +108,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.TestBusquedaFecha" />
         <item itemvalue="Application.TestBusquedaFecha" />
       </list>
     </recent_temporary>
@@ -229,24 +231,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controlador/ControlBBDD.java</url>
-          <line>202</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controlador/ControlLogin.java</url>
           <line>52</line>
           <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/vista/Detalles.java</url>
-          <line>146</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/vista/Detalles.java</url>
-          <line>100</line>
-          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

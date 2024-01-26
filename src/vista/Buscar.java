@@ -77,9 +77,7 @@ public class Buscar extends Application implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         Platform.runLater(() -> listenersCampos());
-        Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservable(
-                ControlBBDD.buscar(null, null, Autor.class)
-        )));
+        Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservableAutores()));
     }
 
     private void listenersCampos() {

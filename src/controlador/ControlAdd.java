@@ -1,10 +1,7 @@
-package vista;
+package controlador;
 
-import controlador.ControlBBDD;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,14 +12,13 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import modelo.Autor;
 import modelo.Libro;
-import org.neodatis.odb.Objects;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
-public class Add extends Application {
+public class ControlAdd extends Application {
     @FXML
     private TextField txtNombre;
     @FXML
@@ -47,7 +43,7 @@ public class Add extends Application {
     private Label labelDuplicadoAutor;
     @FXML
     private Label labelDuplicadoLibro;
-    private MainScreen mainScreen;
+    private ControlMainScreen mainScreen;
 
 
     @Override
@@ -146,7 +142,7 @@ public class Add extends Application {
         Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservableAutores()));
     }
 
-    public void setMainScreen(MainScreen mainScreen) {
+    public void setMainScreen(ControlMainScreen mainScreen) {
         this.mainScreen = mainScreen;
     }
 }

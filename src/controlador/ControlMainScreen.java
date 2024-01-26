@@ -1,26 +1,22 @@
-package vista;
+package controlador;
 
-import controlador.ControlBBDD;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TabPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Autor;
 import modelo.Libro;
-import org.neodatis.odb.Objects;
+import vista.Detalles;
 
 import java.io.IOException;
 
-public class MainScreen extends Application {
+public class ControlMainScreen extends Application {
     @FXML
     private ListView<Autor> listaAutores;
     @FXML
@@ -68,15 +64,15 @@ public class MainScreen extends Application {
                 return;
             }
 
-            Add addController = loader.getController();
-            addController.setMainScreen(this);
+            ControlAdd controlAdd = loader.getController();
+            controlAdd.setMainScreen(this);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
             stage.show();
         });
         btnVentanaBuscar.setOnAction(actionEvent -> {
-            abrirVentana(new Buscar());
+            abrirVentana(new ControlBuscar());
         });
     }
 

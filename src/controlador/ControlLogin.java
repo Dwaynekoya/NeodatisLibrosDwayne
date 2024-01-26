@@ -1,24 +1,25 @@
 package controlador;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modelo.Usuario;
-import org.neodatis.odb.ODB;
-import org.neodatis.odb.ODBFactory;
 import org.neodatis.odb.Objects;
-import vista.MainScreen;
 
-import java.util.Arrays;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 
-public class ControlLogin {
+public class ControlLogin extends Application {
 
     //variables para acceder a elementos de la interfaz gráfica: los nombres deben coincidir con sus fx:id
     @FXML
@@ -29,12 +30,6 @@ public class ControlLogin {
     private Label labelDatosIncorrectos;
     private String username;
     private String password;
-    private final String nombreBBDD = "usuarios.ND";
-    private ODB odb;
-
-    public ControlLogin() {
-        odb = ODBFactory.open(nombreBBDD);
-    }
 
     public void iniciarSesion(ActionEvent actionEvent) {
         recogerDatos();
@@ -53,12 +48,11 @@ public class ControlLogin {
 
     private void openMainWindow(ActionEvent actionEvent) {
         try {
-            new MainScreen().start(new Stage());
+            new ControlMainScreen().start(new Stage());
         } catch (Exception e) {
             System.out.println("Error creando ventana principal.");
             throw new RuntimeException(e);
         }
-        odb.close();
         ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
     }
     /**
@@ -87,5 +81,25 @@ public class ControlLogin {
         password = textoContra.getText();
         if (username.isEmpty() ||  password.isEmpty()) return false;
         return true;
+    }
+    private Scene login;
+
+    @Override
+    public void start(Stage stage) throws Exception {
+        launchLogin(stage);
+        stage.show();
+        stage.setOnCloseRequest(windowEvent -> ControlBBDD.cerrarBBDD());
+    }
+
+    private void launchLogin(Stage stage) {
+        Parent root;
+        try {
+            root = FXMLLoader.load(java.util.Objects.requireNonNull(getClass().getResource("../vista/login.fxml")));
+        } catch (IOException e) {
+            System.out.println("Error asociando vista de inicio de sesión a la pantalla.");
+            throw new RuntimeException(e);
+        }
+        login = new Scene(root);
+        stage.setScene(login);
     }
 }

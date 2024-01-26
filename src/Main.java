@@ -1,18 +1,14 @@
-import controlador.ControlBBDD;
+import controlador.ControlLogin;
 import javafx.application.Application;
-import org.neodatis.odb.ODB;
-import tests.Test;
-import vista.Login;
-import vista.MainScreen;
+import controlador.ControlMainScreen;
 
 
 public class Main {
-    private static boolean skipLogin = true;
+    private static boolean skipLogin = false;
     public static void main(String[] args) {
-        //Test.test1();
         if (skipLogin){
-            Application.launch(MainScreen.class);
-        }else Application.launch(Login.class);
+            Application.launch(ControlMainScreen.class);
+        }else Application.launch(ControlLogin.class);
     }
 
 }

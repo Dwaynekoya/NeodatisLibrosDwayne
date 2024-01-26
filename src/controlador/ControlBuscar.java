@@ -1,6 +1,5 @@
-package vista;
+package controlador;
 
-import controlador.ControlBBDD;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -24,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-public class Buscar extends Application implements Initializable {
+public class ControlBuscar extends Application implements Initializable {
     @FXML
     private Label labelVacioAutor;
     @FXML

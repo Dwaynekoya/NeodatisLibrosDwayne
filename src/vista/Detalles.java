@@ -1,6 +1,7 @@
 package vista;
 
 import controlador.ControlBBDD;
+import controlador.ControlMainScreen;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -50,8 +51,12 @@ public class Detalles extends Application {
     private DatePicker datePicker;
     @FXML
     private ComboBox comboboxAutor;
+    @FXML
+    private Label labelProhibido;
     private Object selectedItem;
-    private MainScreen mainScreen;
+    private ControlMainScreen mainScreen;
+    private Detalles detalles;
+
     @Override
     public void start(Stage stage) throws Exception {
         launchDetalles(stage);
@@ -68,24 +73,6 @@ public class Detalles extends Application {
         stage.setScene(new Scene(root));
 //        Platform.runLater(()->fillDetalles());
     }
-
-    public void setDetails(Object selectedItem, MainScreen mainScreen) {
-        this.mainScreen=mainScreen;
-        this.selectedItem=selectedItem;
-        if (selectedItem instanceof Libro) {
-            tabPane.getSelectionModel().select(tabLibro);
-            tabAutor.setDisable(true);
-            mostrarDetalles((Libro) selectedItem);
-            addModificationListenersLibro();
-        } else if (selectedItem instanceof Autor) {
-            tabLibro.setDisable(true);
-            mostrarDetalles((Autor) selectedItem);
-            addModificationListenersAutor();
-        }
-    }
-
-
-
     private void mostrarDetalles(Libro libro) {
         txtTitulo.setText(libro.getNombre());
         txtGenero.setText(libro.getGenero());
@@ -118,12 +105,13 @@ public class Detalles extends Application {
     }
 
     private void showDetailsWindow(Object selectedItem) {
+        if (this.detalles!=null) return;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/detalles.fxml"));
             Scene scene = new Scene(loader.load());
 
             Detalles detailsController = loader.getController();
-            detailsController.setDetails(selectedItem, mainScreen);
+            detailsController.setDetails(selectedItem, mainScreen,this);
 
             Stage detailsStage = new Stage();
             detailsStage.initModality(Modality.APPLICATION_MODAL);
@@ -132,6 +120,35 @@ public class Detalles extends Application {
             detailsStage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public void setDetails(Object selectedItem, ControlMainScreen mainScreen) {
+        this.mainScreen=mainScreen;
+        this.selectedItem=selectedItem;
+        if (selectedItem instanceof Libro) {
+            tabPane.getSelectionModel().select(tabLibro);
+            tabAutor.setDisable(true);
+            mostrarDetalles((Libro) selectedItem);
+            addModificationListenersLibro();
+        } else if (selectedItem instanceof Autor) {
+            tabLibro.setDisable(true);
+            mostrarDetalles((Autor) selectedItem);
+            addModificationListenersAutor();
+        }
+    }
+    public void setDetails(Object selectedItem, ControlMainScreen mainScreen, Detalles detalles) {
+        this.mainScreen=mainScreen;
+        this.selectedItem=selectedItem;
+        this.detalles = detalles;
+        if (selectedItem instanceof Libro) {
+            tabPane.getSelectionModel().select(tabLibro);
+            tabAutor.setDisable(true);
+            mostrarDetalles((Libro) selectedItem);
+            addModificationListenersLibro();
+        } else if (selectedItem instanceof Autor) {
+            tabLibro.setDisable(true);
+            mostrarDetalles((Autor) selectedItem);
+            addModificationListenersAutor();
         }
     }
 
@@ -198,10 +215,22 @@ public class Detalles extends Application {
     }
 
     public void modificar(ActionEvent actionEvent) {
+        labelProhibido.setVisible(false);
         ControlBBDD.modificar(selectedItem);
         cerrarVentana(actionEvent);
     }
     public void eliminar(ActionEvent actionEvent){
+        labelProhibido.setVisible(false);
+        if (selectedItem instanceof Autor){
+            HashMap criterios = new HashMap<>();
+            criterios.put("autor.nombre", ((Autor) selectedItem).getNombre());
+            criterios.put("autor.apellidos", ((Autor) selectedItem).getApellidos());
+            Objects libros = ControlBBDD.busquedaCompleja(Libro.class, criterios);
+            if (libros!=null || libros.hasNext()){
+                labelProhibido.setVisible(true);
+                return;
+            }
+        }
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmación");
         alert.setHeaderText(null);

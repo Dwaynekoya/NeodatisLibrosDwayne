@@ -29,8 +29,6 @@ public class MainScreen extends Application {
     private Button btnVentanaAdd;
     @FXML
     private Button btnVentanaBuscar;
-    @FXML
-    private Button btnRefrescar;
     private Stage stage;
 
 
@@ -48,7 +46,6 @@ public class MainScreen extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/mainscreen.fxml"));
             loader.setController(this);  // Asigna el controlador aquí en lugar de en el fxml. Necesario para listas
             Parent root = loader.load();
-
             Scene mainScreen = new Scene(root);
             stage.setScene(mainScreen);
 
@@ -62,13 +59,24 @@ public class MainScreen extends Application {
 
     private void funcionamientoButtons() {
         btnVentanaAdd.setOnAction(actionEvent -> {
-           abrirVentana(new Add());
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Add.fxml"));
+            Parent root;
+            try {
+                root = loader.load();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return;
+            }
+
+            Add addController = loader.getController();
+            addController.setMainScreen(this);
+
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
         });
         btnVentanaBuscar.setOnAction(actionEvent -> {
             abrirVentana(new Buscar());
-        });
-        btnRefrescar.setOnAction(actionEvent -> {
-            fillLists();
         });
     }
 
@@ -81,7 +89,7 @@ public class MainScreen extends Application {
         }
     }
 
-    private void fillLists() {
+    public void fillLists() {
         Platform.runLater(() -> listaAutores.setItems(ControlBBDD.generarLista(Autor.class)));
         Platform.runLater(() -> listaLibros.setItems(ControlBBDD.generarLista(Libro.class)));
         //ControlBBDD.visualizarTodoConsola();
@@ -102,7 +110,6 @@ public class MainScreen extends Application {
             handleItemSelection(selectedAutor);
         }
     }
-    //TODO: check whatever this does
 
     private void showDetailsWindow(Object selectedItem) {
         try {
@@ -110,7 +117,7 @@ public class MainScreen extends Application {
             Scene scene = new Scene(loader.load());
 
             Detalles detailsController = loader.getController();
-            detailsController.setDetails(selectedItem);
+            detailsController.setDetails(selectedItem, this);
 
             Stage detailsStage = new Stage();
             detailsStage.initModality(Modality.APPLICATION_MODAL);

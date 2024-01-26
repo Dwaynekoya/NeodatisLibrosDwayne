@@ -100,10 +100,13 @@ public class Buscar extends Application implements Initializable {
         txtSinopsis.textProperty().addListener((observable, oldValue, newValue) ->
         {agregarCriterioSiNoVacio("sinopsis", newValue,criteriosBusquedaLibro); camposVaciosLibro=false;});
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
-            agregarCriterio("fecha_lanzamiento", newValue,criteriosBusquedaLibro); camposVaciosLibro=false;
+            java.util.Date selectedDate = java.sql.Date.valueOf(newValue); //convierte de LocalDate a java.util.Date
+            agregarCriterio("fecha_lanzamiento", selectedDate,criteriosBusquedaLibro); camposVaciosLibro=false;
         });
         comboboxAutor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            agregarCriterio("autor", newValue, criteriosBusquedaLibro);camposVaciosLibro = false;
+            criteriosBusquedaLibro.put("autor.nombre", ((Autor)newValue).getNombre());
+            criteriosBusquedaLibro.put("autor.apellidos", ((Autor)newValue).getApellidos());
+            camposVaciosLibro = false;
 
         });
 
@@ -129,7 +132,7 @@ public class Buscar extends Application implements Initializable {
         if (busqueda ==null){
             listaResultadosAutor.getItems().clear();
         }else {
-            ObservableList result =FXCollections.observableArrayList();
+            ObservableList result =FXCollections.observableArrayList(busqueda);
             listaResultadosAutor.setItems(result);
         }
         //primero checkea cuantos campos hay llenos. si todos estan vacios no deja buscar y muestra label.
@@ -137,16 +140,15 @@ public class Buscar extends Application implements Initializable {
     }
 
     public void buscarLibro(ActionEvent actionEvent) {
+        listaResultadosLibro.getItems().clear(); //clears list in case there are no results
         if (camposVaciosLibro) {
             labelVacioLibro.setVisible(true);
             return;
         }
-        Objects busqueda = ControlBBDD.buscar("fecha_lanzamiento", criteriosBusquedaLibro.get("fecha_lanzamiento"), Libro.class);
-        //Objects busqueda = ControlBBDD.busquedaCompleja(Libro.class,criteriosBusquedaLibro);
-        if (busqueda ==null){
-            listaResultadosLibro.getItems().clear();
-        }else {
-            ObservableList result =FXCollections.observableArrayList();
+        //Objects busqueda = ControlBBDD.buscar("fecha_lanzamiento", criteriosBusquedaLibro.get("fecha_lanzamiento"), Libro.class);
+        Objects busqueda = ControlBBDD.busquedaCompleja(Libro.class,criteriosBusquedaLibro);
+        if (busqueda !=null){
+            ObservableList result =FXCollections.observableArrayList(busqueda);
             listaResultadosLibro.setItems(result);
         }
     }

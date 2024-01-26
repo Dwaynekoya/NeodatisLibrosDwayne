@@ -12,15 +12,18 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Autor;
 import modelo.Libro;
+import org.neodatis.odb.Objects;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Objects;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class Detalles extends Application {
     @FXML
@@ -48,6 +51,7 @@ public class Detalles extends Application {
     @FXML
     private ComboBox comboboxAutor;
     private Object selectedItem;
+    private MainScreen mainScreen;
     @Override
     public void start(Stage stage) throws Exception {
         launchDetalles(stage);
@@ -56,7 +60,7 @@ public class Detalles extends Application {
     private void launchDetalles(Stage stage) {
         Parent root;
         try {
-            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("detalles.fxml")));
+            root = FXMLLoader.load(getClass().getResource("detalles.fxml"));
         } catch (IOException e) {
             System.out.println("Error asociando vista para ver y modificar detalles de un elemento");
             throw new RuntimeException(e);
@@ -65,7 +69,8 @@ public class Detalles extends Application {
 //        Platform.runLater(()->fillDetalles());
     }
 
-    public void setDetails(Object selectedItem) {
+    public void setDetails(Object selectedItem, MainScreen mainScreen) {
+        this.mainScreen=mainScreen;
         this.selectedItem=selectedItem;
         if (selectedItem instanceof Libro) {
             tabPane.getSelectionModel().select(tabLibro);
@@ -96,11 +101,42 @@ public class Detalles extends Application {
         txtNombre.setText(autor.getNombre());
         txtApellidos.setText(autor.getApellidos());
         checkActivo.setSelected(autor.isActivo());
-        org.neodatis.odb.Objects librosAutor = ControlBBDD.buscar("autor",autor, Libro.class);
+        //comparar el autor directamente no funciona, fallo de neodatis?
+        Map<String, Object> criterios = new HashMap<>();
+        criterios.put("autor.nombre", autor.getNombre());
+        criterios.put("autor.apellidos", autor.getApellidos());
+        Objects librosAutor = ControlBBDD.busquedaCompleja(Libro.class, criterios);
         if (librosAutor==null) return;
         ObservableList result = FXCollections.observableArrayList(librosAutor);
         listaLibros.setItems(result);
+        listaLibros.setOnMouseClicked(mouseEvent -> handleLibroSelection());
     }
+
+    private void handleLibroSelection() {
+        Libro selectedLibro = (Libro) listaLibros.getSelectionModel().getSelectedItem();
+        if (selectedLibro != null) {
+            showDetailsWindow(selectedLibro);
+        }
+    }
+
+    private void showDetailsWindow(Object selectedItem) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/detalles.fxml"));
+            Scene scene = new Scene(loader.load());
+
+            Detalles detailsController = loader.getController();
+            detailsController.setDetails(selectedItem, mainScreen);
+
+            Stage detailsStage = new Stage();
+            detailsStage.initModality(Modality.APPLICATION_MODAL);
+            detailsStage.setTitle("Detalles");
+            detailsStage.setScene(scene);
+            detailsStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void addModificationListenersAutor() {
         txtNombre.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.equals(((Autor)selectedItem).getNombre())) {
@@ -159,6 +195,7 @@ public class Detalles extends Application {
      * @param actionEvent
      */
     public void cerrarVentana(ActionEvent actionEvent) {
+        this.mainScreen.fillLists();
         ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
     }
 

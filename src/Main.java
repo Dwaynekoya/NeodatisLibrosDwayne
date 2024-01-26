@@ -9,7 +9,6 @@ import vista.MainScreen;
 public class Main {
     private static boolean skipLogin = true;
     public static void main(String[] args) {
-        //TODO: backups
         //Test.test1();
         if (skipLogin){
             Application.launch(MainScreen.class);

@@ -77,7 +77,7 @@ public class ControlBBDD {
         Objects resultado;
         if (campo==null){
             resultado = odb.getObjects(clase);
-            System.out.println(resultado);
+            //System.out.println(resultado);
         }else {
             ICriterion criterion = Where.equal(campo,valor);
             IQuery query = new CriteriaQuery(clase, criterion);
@@ -92,7 +92,7 @@ public class ControlBBDD {
     }
     /*public static Objects busquedaCompleja(Class clase, String[] campos, Object[] valores) {
         Objects resultado;
-        //TODO: arreglar
+
         if (campos == null || campos.length == 0 || valores == null || valores.length == 0 || campos.length != valores.length) {
             throw new IllegalArgumentException("Campos y valores deben ser no nulos y tener la misma longitud.");
         }
@@ -254,13 +254,13 @@ public class ControlBBDD {
             throw new RuntimeException(e);
         }gives IOException*/
         Path sourcePath = Paths.get("EDITORIAL.ND");
-        Path backupFilePath = Paths.get("EDITORIAL_BACKUP"+ LocalDate.now() +".ND");
+        Path backupFilePath = Paths.get("EDITORIAL_BACKUP.bak");
 
         try {
             Files.copy(sourcePath, backupFilePath, StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("Backup created successfully.");
+            System.out.println("Copia de seguridad realizada.");
         } catch (IOException e) {
-            System.err.println("Error creating backup: " + e.getMessage());
+            System.err.println("Error creando copia de seguridad: " + e.getMessage());
         }
     }
     public static ObservableList generarLista(Class aClass){

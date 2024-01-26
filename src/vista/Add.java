@@ -47,6 +47,7 @@ public class Add extends Application {
     private Label labelDuplicadoAutor;
     @FXML
     private Label labelDuplicadoLibro;
+    private MainScreen mainScreen;
 
 
     @Override
@@ -106,6 +107,7 @@ public class Add extends Application {
                 boolean added = ControlBBDD.addObject(new Libro(titulo,genero,fechaLanzamiento,selectedAutor));
                 if (!added) {labelDuplicadoLibro.setVisible(true);}
                 else {selectedAutor.getLibros().add(libro);}
+                mainScreen.fillLists();
             }
         } else {
             //si falta algún campo se muestra label:
@@ -144,5 +146,9 @@ public class Add extends Application {
         Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservable(
                 ControlBBDD.buscar(null, null, Autor.class)
         )));
+    }
+
+    public void setMainScreen(MainScreen mainScreen) {
+        this.mainScreen = mainScreen;
     }
 }

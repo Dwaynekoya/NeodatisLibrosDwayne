@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="240.0" prefWidth="243.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="240.0" prefWidth="243.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <ButtonBar prefHeight="40.0" prefWidth="277.0" BorderPane.alignment="CENTER">
         <buttons>
           <Button fx:id="btnVentanaAdd" mnemonicParsing="false" text="Añadir" />
             <Button fx:id="btnVentanaBuscar" mnemonicParsing="false" text="Buscar" />
-            <Button fx:id="btnRefrescar" mnemonicParsing="false" text="Refrescar" />
         </buttons>
          <BorderPane.margin>
             <Insets right="20.0" />

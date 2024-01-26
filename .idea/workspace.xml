@@ -5,27 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1e451d51-142f-4bba-99d1-3aad9de2e7a3" name="Changes" comment="home">
-      <change afterPath="$PROJECT_DIR$/src/imgs/loginbackground.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/TestBusquedaAutor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/TestBusquedaFecha.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EDITORIAL.ND" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controlador/ControlLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlador/ControlLogin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/imgs/img.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modelo/Autor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modelo/Autor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modelo/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/modelo/Usuario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/Add.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/Buscar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/Buscar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/Detalles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/Detalles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vista/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/MainScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vista/add.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/add.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vista/buscar.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/buscar.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vista/detalles.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/detalles.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vista/login.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/login.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vista/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/usuarios.ND" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/vista/mainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/mainScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +83,7 @@
       <recent name="C:\Users\Prueba\IdeaProjects\NeodatisLibrosDwayne\src\modelo" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="NeodatisLibrosDwayne" />
@@ -103,6 +92,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TestBusquedaFecha" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="tests.TestBusquedaFecha" />
+      <module name="NeodatisLibrosDwayne" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TestBusquedaFecha" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -116,7 +123,7 @@
       <workItem from="1706101422926" duration="1352000" />
       <workItem from="1706196434984" duration="17684000" />
       <workItem from="1706276116585" duration="7567000" />
-      <workItem from="1706289449701" duration="1004000" />
+      <workItem from="1706289449701" duration="8311000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -198,7 +205,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706215347134</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="home">
+      <option name="closed" value="true" />
+      <created>1706290679178</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706290679178</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,18 +230,23 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controlador/ControlBBDD.java</url>
-          <line>169</line>
+          <line>202</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controlador/ControlLogin.java</url>
-          <line>48</line>
+          <line>52</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/vista/Buscar.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="9" />
+          <url>file://$PROJECT_DIR$/src/vista/Detalles.java</url>
+          <line>146</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/vista/Detalles.java</url>
+          <line>100</line>
+          <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1e451d51-142f-4bba-99d1-3aad9de2e7a3" name="Changes" comment="home">
-      <change afterPath="$PROJECT_DIR$/src/tests/TestBusquedaAutor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tests/TestBusquedaFecha.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+    <list default="true" id="1e451d51-142f-4bba-99d1-3aad9de2e7a3" name="Changes" comment="working">
       <change beforePath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlador/ControlBBDD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/Add.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/Add.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/Buscar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/Buscar.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/vista/Detalles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/Detalles.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vista/MainScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/MainScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/vista/mainScreen.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/vista/mainScreen.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +117,7 @@
       <workItem from="1706101422926" duration="1352000" />
       <workItem from="1706196434984" duration="17684000" />
       <workItem from="1706276116585" duration="7567000" />
-      <workItem from="1706289449701" duration="8311000" />
+      <workItem from="1706289449701" duration="9242000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <option name="closed" value="true" />
@@ -213,7 +207,23 @@
       <option name="project" value="LOCAL" />
       <updated>1706290679178</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="working">
+      <option name="closed" value="true" />
+      <created>1706306541038</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1706306541038</updated>
+    </task>
+    <task id="LOCAL-00013" summary="working">
+      <option name="closed" value="true" />
+      <created>1706306778788</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1706306778788</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -223,16 +233,12 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="class" />
     <MESSAGE value="home" />
-    <option name="LAST_COMMIT_MESSAGE" value="home" />
+    <MESSAGE value="working" />
+    <option name="LAST_COMMIT_MESSAGE" value="working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/controlador/ControlBBDD.java</url>
-          <line>202</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/controlador/ControlLogin.java</url>
           <line>52</line>
@@ -240,12 +246,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/vista/Detalles.java</url>
-          <line>146</line>
+          <line>144</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/vista/Detalles.java</url>
-          <line>100</line>
+          <line>98</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
       </breakpoints>

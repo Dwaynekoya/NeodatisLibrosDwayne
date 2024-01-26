@@ -143,9 +143,10 @@ public class Add extends Application {
 
     @FXML
     private void fillCombobox() {
-        Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservable(
-                ControlBBDD.buscar(null, null, Autor.class)
-        )));
+        Platform.runLater(()-> {
+            comboboxAutor.setItems(ControlBBDD.listaObservableAutores());
+                }
+        );
     }
 
     public void setMainScreen(MainScreen mainScreen) {

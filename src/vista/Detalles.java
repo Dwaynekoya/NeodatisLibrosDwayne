@@ -70,7 +70,6 @@ public class Detalles extends Application {
     }
 
     public void setDetails(Object selectedItem, MainScreen mainScreen) {
-        this.mainScreen=mainScreen;
         this.selectedItem=selectedItem;
         if (selectedItem instanceof Libro) {
             tabPane.getSelectionModel().select(tabLibro);
@@ -92,8 +91,7 @@ public class Detalles extends Application {
         txtSinopsis.setText(libro.getSinopsis());
         datePicker.setValue(libro.getFecha_lanzamiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         comboboxAutor.getSelectionModel().select(libro.getAutor());
-        Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservable(
-                ControlBBDD.buscar(null, null, Autor.class)
+        Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservableAutores(
         )));
     }
 

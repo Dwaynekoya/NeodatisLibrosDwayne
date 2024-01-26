@@ -1,7 +1,5 @@
-package vista;
+package controlador;
 
-import controlador.ControlBBDD;
-import controlador.ControlMainScreen;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -15,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.Autor;
 import modelo.Libro;
 import org.neodatis.odb.Objects;
@@ -26,7 +25,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Detalles extends Application {
+public class ControlDetalles extends Application {
     @FXML
     private Tab tabAutor;
     @FXML
@@ -55,7 +54,7 @@ public class Detalles extends Application {
     private Label labelProhibido;
     private Object selectedItem;
     private ControlMainScreen mainScreen;
-    private Detalles detalles;
+    private ControlDetalles detalles;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -65,11 +64,12 @@ public class Detalles extends Application {
     private void launchDetalles(Stage stage) {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("detalles.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../vista/detalles.fxml"));
         } catch (IOException e) {
             System.out.println("Error asociando vista para ver y modificar detalles de un elemento");
             throw new RuntimeException(e);
         }
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(new Scene(root));
 //        Platform.runLater(()->fillDetalles());
     }
@@ -110,7 +110,7 @@ public class Detalles extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/detalles.fxml"));
             Scene scene = new Scene(loader.load());
 
-            Detalles detailsController = loader.getController();
+            ControlDetalles detailsController = loader.getController();
             detailsController.setDetails(selectedItem, mainScreen,this);
 
             Stage detailsStage = new Stage();
@@ -136,7 +136,7 @@ public class Detalles extends Application {
             addModificationListenersAutor();
         }
     }
-    public void setDetails(Object selectedItem, ControlMainScreen mainScreen, Detalles detalles) {
+    public void setDetails(Object selectedItem, ControlMainScreen mainScreen, ControlDetalles detalles) {
         this.mainScreen=mainScreen;
         this.selectedItem=selectedItem;
         this.detalles = detalles;

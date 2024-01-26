@@ -12,7 +12,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Autor;
 import modelo.Libro;
-import vista.Detalles;
 
 import java.io.IOException;
 
@@ -55,7 +54,7 @@ public class ControlMainScreen extends Application {
 
     private void funcionamientoButtons() {
         btnVentanaAdd.setOnAction(actionEvent -> {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("Add.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("../vista/Add.fxml"));
             Parent root;
             try {
                 root = loader.load();
@@ -112,7 +111,7 @@ public class ControlMainScreen extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/detalles.fxml"));
             Scene scene = new Scene(loader.load());
 
-            Detalles detailsController = loader.getController();
+            ControlDetalles detailsController = loader.getController();
             detailsController.setDetails(selectedItem, this);
 
             Stage detailsStage = new Stage();

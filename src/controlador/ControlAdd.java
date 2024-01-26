@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 import modelo.Autor;
 import modelo.Libro;
 
@@ -134,8 +136,10 @@ public class ControlAdd extends Application {
         }
         Scene add = new Scene(root);
         stage.setScene(add);
+        stage.initStyle(StageStyle.UNDECORATED);
 //        fillCombobox();
     }
+
 
     @FXML
     private void fillCombobox() {

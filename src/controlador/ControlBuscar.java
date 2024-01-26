@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modelo.Autor;
 import modelo.Libro;
 import org.neodatis.odb.Objects;
@@ -63,13 +64,14 @@ public class ControlBuscar extends Application implements Initializable {
     private void launchBuscar(Stage stage) {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("buscar.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../vista/buscar.fxml"));
         } catch (IOException e) {
             System.out.println("Error asociando vista para añadir elementos");
             throw new RuntimeException(e);
         }
         sceneBuscar = new Scene(root);
         stage.setScene(sceneBuscar);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
 
     }

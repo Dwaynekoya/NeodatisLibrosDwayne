@@ -87,6 +87,8 @@ public class ControlLogin extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         launchLogin(stage);
+        stage.setTitle("Gestión editorial");
+        stage.setResizable(false);
         stage.show();
         stage.setOnCloseRequest(windowEvent -> ControlBBDD.cerrarBBDD());
     }

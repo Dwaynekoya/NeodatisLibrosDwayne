@@ -1,0 +1,21 @@
+.root{
+    -fx-background-color: #FFFCFA;
+}
+.button {
+    -fx-background-color: #0097B2; /* Background color (solid color) */
+    -fx-text-fill: #FFFCFA; /* Text color */
+    -fx-font-size: 14px; /* Font size (adjust as needed) */
+    -fx-font-weight: bold; /* Font weight (optional) */
+}
+
+.button:hover {
+    -fx-background-color: #006678;
+}
+
+* {
+    -fx-text-fill: #006678;
+}
+
+.list-cell {
+    -fx-text-fill: #006678;
+}

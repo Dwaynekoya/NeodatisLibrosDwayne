@@ -77,7 +77,11 @@ public class ControlBBDD {
         ICriterion[] criteriosArray = new ICriterion[criterios.size()];
         int index = 0;
         for (Map.Entry<String, Object> entry : criterios.entrySet()) {
-            criteriosArray[index++] = Where.equal(entry.getKey(), entry.getValue());
+            if (entry.getKey().equals("nombre")||entry.getKey().equals("apellidos")){
+                criteriosArray[index++] = Where.like(entry.getKey(), (String) entry.getValue());
+            }else {
+                criteriosArray[index++] = Where.equal(entry.getKey(), entry.getValue());
+            }
         }
 
         ICriterion criterio = criteriosArray[0];

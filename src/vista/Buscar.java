@@ -51,14 +51,16 @@ public class Buscar extends Application implements Initializable {
     @FXML
     private ListView<Libro> listaResultadosLibro;
     private Map criteriosBusquedaAutor, criteriosBusquedaLibro;
-    private boolean camposVaciosAutor; private boolean camposVaciosLibro;
-
 
     @Override
     public void start(Stage stage) throws Exception {
         launchBuscar(stage);
     }
 
+    /**
+     * asocia el fxml de la vista a este controlador
+     * @param stage: ventana donde mostraremos la vista
+     */
     private void launchBuscar(Stage stage) {
         Parent root;
         try {
@@ -69,59 +71,28 @@ public class Buscar extends Application implements Initializable {
         }
         sceneBuscar = new Scene(root);
         stage.setScene(sceneBuscar);
-        //Platform.runLater(()->listenersCampos());
         stage.show();
 
     }
+
+    /**
+     * usado para asegurarnos de que los objetos del fxml han sido inicializados antes de usarlos en los metodos a los que
+     * se llama en este
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        Platform.runLater(() -> listenersCampos());
+        Platform.runLater(this::listenersCampos);
         Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservableAutores()));
     }
 
-    private void listenersCampos() {
-        criteriosBusquedaAutor = new HashMap<>();
-        criteriosBusquedaLibro = new HashMap<>();
-        camposVaciosAutor = true;
-        camposVaciosLibro = true;
-        txtNombre.textProperty().addListener((observable, oldValue, newValue) ->
-        {agregarCriterioSiNoVacio("nombre", newValue, criteriosBusquedaAutor); camposVaciosAutor=false;});
-        txtApellidos.textProperty().addListener((observable, oldValue, newValue) ->
-        {agregarCriterioSiNoVacio("apellidos", newValue, criteriosBusquedaAutor); camposVaciosAutor=false;});
-        checkActivo.selectedProperty().addListener((observable, oldValue, newValue) ->
-        {criteriosBusquedaAutor.put("activo", newValue); camposVaciosAutor=false;});
-        txtTitulo.textProperty().addListener((observable, oldValue, newValue) ->
-        {agregarCriterioSiNoVacio("nombre", newValue,criteriosBusquedaLibro); camposVaciosLibro=false;});
-        txtGenero.textProperty().addListener((observable, oldValue, newValue) ->
-        {agregarCriterioSiNoVacio("genero", newValue,criteriosBusquedaLibro); camposVaciosLibro=false;});
-        txtSinopsis.textProperty().addListener((observable, oldValue, newValue) ->
-        {agregarCriterioSiNoVacio("sinopsis", newValue,criteriosBusquedaLibro); camposVaciosLibro=false;});
-        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
-            java.util.Date selectedDate = java.sql.Date.valueOf(newValue); //convierte de LocalDate a java.util.Date
-            agregarCriterio("fecha_lanzamiento", selectedDate,criteriosBusquedaLibro); camposVaciosLibro=false;
-        });
-        comboboxAutor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            criteriosBusquedaLibro.put("autor.nombre", ((Autor)newValue).getNombre());
-            criteriosBusquedaLibro.put("autor.apellidos", ((Autor)newValue).getApellidos());
-            camposVaciosLibro = false;
-
-        });
-
-
-    }
-    private void agregarCriterio(String campo, Object valor, Map criteriosBusqueda) {
-        criteriosBusqueda.put(campo, valor);
-    }
-
-    private void agregarCriterioSiNoVacio(String campo, String valor, Map criteriosBusqueda) {
-        if (!valor.isEmpty()) {
-            criteriosBusqueda.put(campo, valor);
-        }
-    }
+    /**
+     * Busca un autor según los campos de búsqueda en la ventana
+     * @param actionEvent: boton pulsado
+     */
 
     public void buscarAutor(ActionEvent actionEvent) {
-        if (camposVaciosAutor) {
+        if (criteriosBusquedaAutor.isEmpty()) {
             ObservableList result =FXCollections.observableArrayList(ControlBBDD.buscar("activo", checkActivo.isSelected(), Autor.class));
             listaResultadosAutor.setItems(result);
             return;
@@ -133,13 +104,15 @@ public class Buscar extends Application implements Initializable {
             ObservableList result =FXCollections.observableArrayList(busqueda);
             listaResultadosAutor.setItems(result);
         }
-        //primero checkea cuantos campos hay llenos. si todos estan vacios no deja buscar y muestra label.
-        //si solo hay 1 usa busqueda normal
     }
 
+    /**
+     * Busca un libro según los campos de búsqueda en la ventana
+     * @param actionEvent: boton pulsado
+     */
     public void buscarLibro(ActionEvent actionEvent) {
         listaResultadosLibro.getItems().clear(); //clears list in case there are no results
-        if (camposVaciosLibro) {
+        if (criteriosBusquedaLibro.isEmpty()) {
             labelVacioLibro.setVisible(true);
             return;
         }
@@ -153,11 +126,77 @@ public class Buscar extends Application implements Initializable {
 
     /**
      * Cierra la ventana cuando se pulsa el botón adecuado
-     * @param actionEvent
+     * @param actionEvent: boton pulsado
      */
     public void cerrarVentana(ActionEvent actionEvent) {
         ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
     }
+    /**
+     * añade listeners a cada campo de busqueda en la vista
+     */
+    private void listenersCampos() {
+        criteriosBusquedaAutor = new HashMap<>();
+        criteriosBusquedaLibro = new HashMap<>();
 
+        txtNombre.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isEmpty()) {
+                criteriosBusquedaAutor.remove("nombre");
+            } else {
+                criteriosBusquedaAutor.put("nombre", newValue);
+            }
+
+        });
+
+        txtApellidos.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isEmpty()) {
+                criteriosBusquedaAutor.remove("apellidos");
+            } else {
+                criteriosBusquedaAutor.put("apellidos", newValue);
+            }
+        });
+
+        checkActivo.selectedProperty().addListener((observable, oldValue, newValue) -> {
+            criteriosBusquedaAutor.put("activo", newValue);
+
+        });
+
+        txtTitulo.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isEmpty()) {
+                criteriosBusquedaLibro.remove("nombre");
+            } else {
+                criteriosBusquedaLibro.put("nombre", newValue);
+            }
+        });
+
+        txtGenero.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isEmpty()) {
+                criteriosBusquedaLibro.remove("genero");
+            } else {
+                criteriosBusquedaLibro.put("genero", newValue);
+            }
+        });
+
+        txtSinopsis.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.isEmpty()) {
+                criteriosBusquedaLibro.remove("sinopsis");
+            } else {
+                criteriosBusquedaLibro.put("sinopsis", newValue);
+            }
+        });
+
+        datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                java.util.Date selectedDate = java.sql.Date.valueOf(newValue);
+                criteriosBusquedaLibro.put("fecha_lanzamiento", selectedDate);
+            }
+        });
+
+        comboboxAutor.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                criteriosBusquedaLibro.put("autor.nombre", ((Autor) newValue).getNombre());
+                criteriosBusquedaLibro.put("autor.apellidos", ((Autor) newValue).getApellidos());
+            }
+        });
+    }
 
 }

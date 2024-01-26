@@ -38,13 +38,9 @@ public class MainScreen extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
         stage.setTitle("Gestión editorial");
-        stage.setOnCloseRequest(windowEvent -> cerrarBBDD());
+        stage.setOnCloseRequest(windowEvent -> ControlBBDD.cerrarBBDD());
         launchMain();
         stage.show();
-    }
-
-    private void cerrarBBDD() {
-        ControlBBDD.cerrarBBDD();
     }
 
     private void launchMain() {

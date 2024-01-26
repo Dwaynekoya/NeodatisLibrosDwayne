@@ -1,6 +1,10 @@
 package vista;
 
+import controlador.ControlBBDD;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,8 +17,9 @@ import modelo.Autor;
 import modelo.Libro;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Date;
 import java.util.Objects;
 
 public class Detalles extends Application {
@@ -65,36 +70,36 @@ public class Detalles extends Application {
         if (selectedItem instanceof Libro) {
             tabPane.getSelectionModel().select(tabLibro);
             tabAutor.setDisable(true);
-            showDetails((Libro) selectedItem);
+            mostrarDetalles((Libro) selectedItem);
             addModificationListenersLibro();
         } else if (selectedItem instanceof Autor) {
             tabLibro.setDisable(true);
-            showDetails((Autor) selectedItem);
+            mostrarDetalles((Autor) selectedItem);
             addModificationListenersAutor();
         }
     }
 
 
 
-    private void showDetails(Libro libro) {
-        //System.out.println("Detalles libro");
-/*        lblTitle.setText("Title: " + libro.getNombre());
-        lblAuthor.setText("Author: " + libro.getAutor().getNombre());
-        lblDetails.setText("Other details related to the selected book...");*/
+    private void mostrarDetalles(Libro libro) {
         txtTitulo.setText(libro.getNombre());
         txtGenero.setText(libro.getGenero());
         txtSinopsis.setText(libro.getSinopsis());
         datePicker.setValue(libro.getFecha_lanzamiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         comboboxAutor.getSelectionModel().select(libro.getAutor());
-
+        Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservable(
+                ControlBBDD.buscar(null, null, Autor.class)
+        )));
     }
 
-    private void showDetails(Autor autor) {
-        //System.out.println("Detalles autor " + autor.getNombre());
+    private void mostrarDetalles(Autor autor) {
         txtNombre.setText(autor.getNombre());
         txtApellidos.setText(autor.getApellidos());
         checkActivo.setSelected(autor.isActivo());
-
+        org.neodatis.odb.Objects librosAutor = ControlBBDD.buscar("autor",autor, Libro.class);
+        if (librosAutor==null) return;
+        ObservableList result = FXCollections.observableArrayList(librosAutor);
+        listaLibros.setItems(result);
     }
     private void addModificationListenersAutor() {
         txtNombre.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -133,8 +138,10 @@ public class Detalles extends Application {
         });
 
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.equals(((Libro)selectedItem).getFecha_lanzamiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate())) {
-                ((Libro) selectedItem).setFecha_lanzamiento(Date.valueOf(newValue));
+            Date fechaLanzamiento;
+            fechaLanzamiento = java.util.Date.from(newValue.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            if (!fechaLanzamiento.equals(((Libro)selectedItem).getFecha_lanzamiento())) {
+                ((Libro) selectedItem).setFecha_lanzamiento(fechaLanzamiento);
             }
         });
 
@@ -155,9 +162,29 @@ public class Detalles extends Application {
         ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
     }
 
-    public void modificarLibro(ActionEvent actionEvent) {
+    public void modificar(ActionEvent actionEvent) {
+        ControlBBDD.modificar(selectedItem);
+        cerrarVentana(actionEvent);
     }
+    public void eliminar(ActionEvent actionEvent){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación");
+        alert.setHeaderText(null);
+        alert.setContentText("¿Quieres eliminar el " + selectedItem.getClass().getSimpleName().toLowerCase()+ "?");
 
-    public void modificarAutor(ActionEvent actionEvent) {
+        ButtonType buttonTypeOK = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
+        ButtonType buttonTypeCancel = new ButtonType("Cancelar", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        alert.getButtonTypes().setAll(buttonTypeOK, buttonTypeCancel);
+
+        // Show the confirmation dialog and wait for the user's response
+        alert.showAndWait().ifPresent(response -> {
+            if (response == buttonTypeOK) {
+                ControlBBDD.eliminar(selectedItem);
+            } else {
+                System.out.println("Operación cancelada.");
+            }
+        });
+        cerrarVentana(actionEvent);
     }
 }

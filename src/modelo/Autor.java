@@ -2,6 +2,7 @@ package modelo;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public class Autor {
@@ -58,5 +59,13 @@ public class Autor {
     @Override
     public String toString() {
         return apellidos + ", " + nombre;
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Autor otroAutor = (Autor) o;
+        return Objects.equals(nombre, otroAutor.nombre) &&
+                Objects.equals(apellidos, otroAutor.apellidos);
     }
 }

@@ -102,8 +102,10 @@ public class Add extends Application {
             Autor selectedAutor = (Autor) comboboxAutor.getSelectionModel().getSelectedItem();
             if (localDate != null && selectedAutor != null) {
                 fechaLanzamiento = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                Libro libro = new Libro(titulo,genero,fechaLanzamiento,selectedAutor);
                 boolean added = ControlBBDD.addObject(new Libro(titulo,genero,fechaLanzamiento,selectedAutor));
-                if (!added) labelDuplicadoLibro.setVisible(true);
+                if (!added) {labelDuplicadoLibro.setVisible(true);}
+                else {selectedAutor.getLibros().add(libro);}
             }
         } else {
             //si falta algún campo se muestra label:
@@ -139,9 +141,8 @@ public class Add extends Application {
 
     @FXML
     private void fillCombobox() {
-        Objects<Autor> autores = ControlBBDD.buscar(null, null, Autor.class);
-        assert autores != null;
-        ObservableList<Autor> dataObservableList = FXCollections.observableArrayList(autores);
-        Platform.runLater(()-> comboboxAutor.setItems(dataObservableList));
+        Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservable(
+                ControlBBDD.buscar(null, null, Autor.class)
+        )));
     }
 }

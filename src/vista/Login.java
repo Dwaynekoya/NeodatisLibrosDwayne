@@ -1,6 +1,7 @@
 package vista;
 
 
+import controlador.ControlBBDD;
 import controlador.ControlLogin;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +19,7 @@ public class Login extends Application{
     public void start(Stage stage) throws Exception {
         launchLogin(stage);
         stage.show();
-
+        stage.setOnCloseRequest(windowEvent -> ControlBBDD.cerrarBBDD());
     }
 
     private void launchLogin(Stage stage) {

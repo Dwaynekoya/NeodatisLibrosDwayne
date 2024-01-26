@@ -13,8 +13,8 @@
                     <children>
                         <ButtonBar layoutX="302.0" layoutY="331.0" prefHeight="40.0" prefWidth="299.0">
                             <buttons>
-                        <Button fx:id="buttonBorrar" mnemonicParsing="false" text="Borrar" />
-                                <Button mnemonicParsing="false" onAction="#modificarAutor" text="Modificar" />
+                        <Button fx:id="buttonBorrar" mnemonicParsing="false" onAction="#eliminar" text="Borrar" />
+                                <Button mnemonicParsing="false" onAction="#modificar" text="Modificar" />
                                 <Button mnemonicParsing="false" onAction="#cerrarVentana" text="Cerrar" />
                             </buttons>
                             <padding>
@@ -38,15 +38,6 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <ButtonBar layoutX="400.0" layoutY="331.0" prefHeight="40.0" prefWidth="200.0">
-                            <buttons>
-                                <Button mnemonicParsing="false" text="Cerrar" />
-                                <Button mnemonicParsing="false" onAction="#modificarLibro" text="Modificar" />
-                            </buttons>
-                            <padding>
-                                <Insets right="10.0" />
-                            </padding>
-                        </ButtonBar>
                         <Label layoutX="31.0" layoutY="47.0" text="´Título" />
                         <Label layoutX="23.0" layoutY="91.0" text="Género" />
                         <Label layoutX="21.0" layoutY="129.0" text="Sinopsis" />
@@ -54,7 +45,7 @@
                         <Label layoutX="379.0" layoutY="91.0" text="Autor" />
                         <TextField fx:id="txtTitulo" layoutX="104.0" layoutY="43.0" />
                         <TextField fx:id="txtGenero" layoutX="105.0" layoutY="87.0" />
-                        <TextArea fx:id="txtSinopsis" layoutX="106.0" layoutY="129.0" prefHeight="160.0" prefWidth="149.0" />
+                        <TextArea fx:id="txtSinopsis" layoutX="106.0" layoutY="129.0" prefHeight="160.0" prefWidth="149.0" wrapText="true" />
                         <ComboBox fx:id="comboboxAutor" layoutX="428.0" layoutY="87.0" prefWidth="150.0" />
                         <Label fx:id="labelRellenarLibro" layoutX="287.0" layoutY="309.0" text="Comprueba que no dejas campos sin rellenar." textFill="#e41919" visible="false">
                             <font>
@@ -62,6 +53,16 @@
                             </font>
                         </Label>
                         <DatePicker fx:id="datePicker" layoutX="427.0" layoutY="43.0" prefHeight="25.0" prefWidth="152.0" />
+                  <ButtonBar layoutX="300.0" layoutY="329.0" prefHeight="40.0" prefWidth="299.0">
+                     <buttons>
+                        <Button fx:id="buttonBorrar1" mnemonicParsing="false" onAction="#eliminar" text="Borrar" />
+                        <Button mnemonicParsing="false" onAction="#modificar" text="Modificar" />
+                        <Button mnemonicParsing="false" onAction="#cerrarVentana" text="Cerrar" />
+                     </buttons>
+                     <padding>
+                        <Insets right="10.0" />
+                     </padding>
+                  </ButtonBar>
                     </children></AnchorPane>
             </content>
         </Tab>

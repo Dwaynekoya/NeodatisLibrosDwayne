@@ -14,9 +14,14 @@ import org.neodatis.odb.core.query.criteria.Where;
 import org.neodatis.odb.impl.core.query.criteria.CriteriaQuery;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Map;
 
 public class ControlBBDD {
     private static final ODB odb = ODBFactory.open("EDITORIAL.ND");
@@ -57,6 +62,7 @@ public class ControlBBDD {
 
     public static void cerrarBBDD(){
         odb.close();
+        backup();
     }
 
     /***
@@ -67,7 +73,7 @@ public class ControlBBDD {
      * @param clase: clase del objeto, "tabla"
      * @return
      */
-    public static Objects buscar(String campo, String valor, Class clase){
+    public static Objects buscar(String campo, Object valor, Class clase){
         Objects resultado;
         if (campo==null){
             resultado = odb.getObjects(clase);
@@ -84,11 +90,9 @@ public class ControlBBDD {
             return resultado;
         }
     }
-    public static Objects busquedaCompleja(Class clase, String[] campos, String[] valores) {
-
-        ODB odb= ODBFactory.open("neodatis.test");
+    /*public static Objects busquedaCompleja(Class clase, String[] campos, Object[] valores) {
         Objects resultado;
-
+        //TODO: arreglar
         if (campos == null || campos.length == 0 || valores == null || valores.length == 0 || campos.length != valores.length) {
             throw new IllegalArgumentException("Campos y valores deben ser no nulos y tener la misma longitud.");
         }
@@ -104,7 +108,43 @@ public class ControlBBDD {
         }
 
         IQuery query=new CriteriaQuery(clase, criterio);
-        resultado=odb.getObjects(clase);
+        resultado=odb.getObjects(query);
+        /*ICriterion criterio = new And()
+                .add(Where.equal("nombreUsuario", "admin"))
+                .add(Where.equal("contra", valores[1]));
+
+        System.out.println(valores[1]);
+        IQuery query = new CriteriaQuery(clase,criterio);
+        resultado=odb.getObjects(query);*/
+       /* odb.commit();
+
+        if (resultado.isEmpty()) {
+            return null;
+        } else {
+            return resultado;
+        }
+    }*/
+    public static Objects busquedaCompleja(Class clase, Map<String, Object> criterios) {
+        Objects resultado;
+
+        if (criterios == null || criterios.isEmpty()) {
+            throw new IllegalArgumentException("El mapa de criterios no puede ser nulo o vacío.");
+        }
+
+        ICriterion[] criteriosArray = new ICriterion[criterios.size()];
+        int index = 0;
+        for (Map.Entry<String, Object> entry : criterios.entrySet()) {
+            criteriosArray[index++] = Where.equal(entry.getKey(), entry.getValue());
+        }
+
+        ICriterion criterio = criteriosArray[0];
+        for (int i = 1; i < criteriosArray.length; i++) {
+            criterio = Where.and().add(criterio).add(criteriosArray[i]);
+        }
+
+        IQuery query = new CriteriaQuery(clase, criterio);
+        resultado = odb.getObjects(query);
+        odb.commit();
 
         if (resultado.isEmpty()) {
             return null;
@@ -199,7 +239,7 @@ public class ControlBBDD {
     }*/
 
     public static void backup(){
-        try {
+        /*try {
             FileOutputStream backup = new FileOutputStream ("EDITORIAL_BACKUP"+ LocalDate.now() +".ND");
             FileInputStream filein=new FileInputStream("EDITORIAL.ND");
             int i;
@@ -212,10 +252,29 @@ public class ControlBBDD {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }gives IOException*/
+        Path sourcePath = Paths.get("EDITORIAL.ND");
+        Path backupFilePath = Paths.get("EDITORIAL_BACKUP"+ LocalDate.now() +".ND");
+
+        try {
+            Files.copy(sourcePath, backupFilePath, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("Backup created successfully.");
+        } catch (IOException e) {
+            System.err.println("Error creating backup: " + e.getMessage());
         }
     }
     public static ObservableList generarLista(Class aClass){
-        Objects autores = buscar(null, null, aClass);
-        return FXCollections.observableArrayList(autores);
+        Objects resultado = buscar(null, null, aClass);
+        return FXCollections.observableArrayList(resultado);
+    }
+
+    public static void modificar(Object selectedItem) {
+        odb.store(selectedItem);
+        odb.commit();
+    }
+
+    public static ObservableList listaObservable(Objects items) {
+        assert items != null;
+        return FXCollections.observableArrayList(items);
     }
 }

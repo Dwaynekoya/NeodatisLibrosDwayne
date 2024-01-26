@@ -2,9 +2,9 @@ package modelo;
 
 public class Usuario {
     private String nombreUsuario;
-    private char[] contra;
+    private String contra;
 
-    public Usuario(String nombreUsuario, char[] contra) {
+    public Usuario(String nombreUsuario, String contra) {
         this.nombreUsuario = nombreUsuario;
         this.contra = contra;
     }
@@ -17,11 +17,11 @@ public class Usuario {
         this.nombreUsuario = nombreUsuario;
     }
 
-    public char[] getContra() {
+    public String getContra() {
         return contra;
     }
 
-    public void setContra(char[] contra) {
+    public void setContra(String contra) {
         this.contra = contra;
     }
 }

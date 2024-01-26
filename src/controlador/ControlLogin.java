@@ -3,15 +3,19 @@ package controlador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import modelo.Usuario;
 import org.neodatis.odb.ODB;
 import org.neodatis.odb.ODBFactory;
+import org.neodatis.odb.Objects;
 import vista.MainScreen;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ControlLogin {
@@ -21,8 +25,10 @@ public class ControlLogin {
     public TextField textoUsuario;
     @FXML
     private PasswordField textoContra;
+    @FXML
+    private Label labelDatosIncorrectos;
     private String username;
-    private char[] password;
+    private String password;
     private final String nombreBBDD = "usuarios.ND";
     private ODB odb;
 
@@ -32,13 +38,17 @@ public class ControlLogin {
 
     public void iniciarSesion(ActionEvent actionEvent) {
         recogerDatos();
-        //TODO: buscar en base de datos
-        //for now:
-        if (username.matches("admin")&& Arrays.equals(password, "admin".toCharArray())){
+        Map criteriosBusqueda = new HashMap<>();
+        criteriosBusqueda.put("nombreUsuario",username);
+        criteriosBusqueda.put("contra", password);
+        Objects usuario = ControlBBDD.busquedaCompleja(Usuario.class, criteriosBusqueda);
+        //busquedaCompleja devuelve null si no hay coincidencias.
+        if (usuario!=null){
             openMainWindow(actionEvent);
         } else {
-        //TODO: mostrar mensaje: login incorrecto
-        System.out.println("LOGIN INCORRECTO");}
+            labelDatosIncorrectos.setText("Datos incorrectos.");
+            labelDatosIncorrectos.setVisible(true);
+        }
     }
 
     private void openMainWindow(ActionEvent actionEvent) {
@@ -57,23 +67,25 @@ public class ControlLogin {
      */
     public void crearUser(ActionEvent actionEvent) {
         if (!recogerDatos()){
-            //TODO: MOSTRAR MENSAJE SI FALTA UN CAMPO POR RELLENAR
+            labelDatosIncorrectos.setText("Rellene ambos campos.");
+            labelDatosIncorrectos.setVisible(true);
             return;
         }
         Usuario usuario = new Usuario(username, password);
-        //TODO: comprobacion de que no existe el usuario (comprobar que no se repite el nombre)
-        odb.store(usuario);
-        odb.commit();
+        boolean added = ControlBBDD.addObject(usuario);
+        if (!added){
+            labelDatosIncorrectos.setText("Ya existe un usuario con ese nombre.");
+            labelDatosIncorrectos.setVisible(true);
+        }
     }
     /**
      * Toma los valores de los textfields y los asigna a Strings a nivel de clase
-     * @return
+     * @return false si hay un campo vacío, true si ambos han sido completados
      */
     private boolean recogerDatos() {
-        //TODO: Comprobacion de que no hay campos vacíos
-        //si uno esta vacio devuelve false, en caso de que devuelva false no se continua con los otros metodos
         username = textoUsuario.getText();
-        password = textoContra.getText().toCharArray();
+        password = textoContra.getText();
+        if (username.isEmpty() ||  password.isEmpty()) return false;
         return true;
     }
 }

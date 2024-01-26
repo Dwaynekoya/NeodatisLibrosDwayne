@@ -7,18 +7,18 @@ import org.neodatis.odb.Objects;
 import java.text.ParseException;
 
 public class Test {
-    public static void test1(ControlBBDD controlBBDD){
+    public static void test1(){
         try {
-            controlBBDD.insertarDatosPrueba();
+            ControlBBDD.insertarDatosPrueba();
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        controlBBDD.visualizarTodoConsola();
-        Objects autores = controlBBDD.buscar("nombre", "Jane", Autor.class);
+        ControlBBDD.visualizarTodoConsola();
+        Objects autores = ControlBBDD.buscar("nombre", "Jane", Autor.class);
         Autor jane = (Autor) autores.getFirst();
         System.out.printf("Encontrado: %s %n", jane);
         System.out.printf("Borrando... %n");
         //controlBBDD.eliminar("nombre", "Rick", Autor.class);
-        controlBBDD.visualizarTodoConsola();
+        ControlBBDD.visualizarTodoConsola();
     }
 }

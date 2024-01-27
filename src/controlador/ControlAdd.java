@@ -135,8 +135,8 @@ public class ControlAdd extends Application {
             throw new RuntimeException(e);
         }
         Scene add = new Scene(root);
+        stage.setTitle("Añadir elementos");
         stage.setScene(add);
-        stage.initStyle(StageStyle.UNDECORATED);
 //        fillCombobox();
     }
 

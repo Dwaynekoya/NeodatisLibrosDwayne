@@ -18,13 +18,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 
 public class ControlBBDD {
     private static final ODB odb = ODBFactory.open("EDITORIAL.ND");
+    private static final int maxBackups=4;
 
     /**
      * Cierra la base de datos.
@@ -136,10 +142,14 @@ public class ControlBBDD {
      */
     public static void backup(){
         Path sourcePath = Paths.get("EDITORIAL.ND");
-        Path backupFilePath = Paths.get("EDITORIAL_BACKUP"+LocalDate.now()+".bak");
+
+        String formattedDateTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+
+        Path backupFilePath = Paths.get("EDITORIAL_BACKUP_" + formattedDateTime + ".bak");
 
         try {
             Files.copy(sourcePath, backupFilePath, StandardCopyOption.REPLACE_EXISTING);
+            limpiarArchivos();
             System.out.println("Copia de seguridad realizada.");
         } catch (IOException e) {
             System.err.println("Error creando copia de seguridad: " + e.getMessage());
@@ -204,5 +214,35 @@ public class ControlBBDD {
             odb.store(libro);
         }
         odb.commit();
+    }
+    public static void limpiarArchivos() {
+        try {
+            List<Path> archivos = Files.walk(Paths.get("."))
+                    .filter(path -> path.toString().endsWith(".bak"))
+                    .sorted(Comparator.comparingLong(path -> getFileCreationTime(path)))
+                    .toList();
+
+            int archivosAEliminar = archivos.size() - maxBackups;
+
+            for (int i = 0; i < archivosAEliminar; i++) {
+                Files.delete(archivos.get(i));
+                System.out.println("Archivo eliminado: " + archivos.get(i));
+            }
+
+            System.out.println("Operación completada.");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static long getFileCreationTime(Path path) {
+        try {
+            BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);
+            return attributes.creationTime().toMillis();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
     }
 }

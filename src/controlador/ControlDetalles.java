@@ -69,7 +69,6 @@ public class ControlDetalles extends Application {
             System.out.println("Error asociando vista para ver y modificar detalles de un elemento");
             throw new RuntimeException(e);
         }
-        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(new Scene(root));
 //        Platform.runLater(()->fillDetalles());
     }

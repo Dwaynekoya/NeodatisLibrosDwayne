@@ -71,7 +71,7 @@ public class ControlBuscar extends Application implements Initializable {
         }
         sceneBuscar = new Scene(root);
         stage.setScene(sceneBuscar);
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("Busqueda");
         stage.show();
 
     }

@@ -31,6 +31,10 @@ public class ControlLogin extends Application {
     private String username;
     private String password;
 
+    /**
+     * Método para entrar a la aplicación principal
+     * @param actionEvent: botón que ha lanzado el metodo
+     */
     public void iniciarSesion(ActionEvent actionEvent) {
         recogerDatos();
         Map criteriosBusqueda = new HashMap<>();

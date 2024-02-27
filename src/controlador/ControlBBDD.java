@@ -215,8 +215,13 @@ public class ControlBBDD {
         }
         odb.commit();
     }
+
+    /**
+     * Método que elimina las copias de seguridad más antiguas. El número máximo de copias está almacenado en una variable global
+     */
     public static void limpiarArchivos() {
         try {
+            //los archivos se ordenan según su fecha de creación
             List<Path> archivos = Files.walk(Paths.get("."))
                     .filter(path -> path.toString().endsWith(".bak"))
                     .sorted(Comparator.comparingLong(path -> getFileCreationTime(path)))
@@ -236,6 +241,11 @@ public class ControlBBDD {
         }
     }
 
+    /**
+     * Método que comprueba la fecha y hora de creación de un archivo.
+     * @param path
+     * @return
+     */
     private static long getFileCreationTime(Path path) {
         try {
             BasicFileAttributes attributes = Files.readAttributes(path, BasicFileAttributes.class);

@@ -2,12 +2,14 @@ package controlador;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import modelo.Autor;
@@ -42,6 +44,12 @@ public class ControlMainScreen extends Application {
             loader.setController(this);  // Asigna el controlador aquí en lugar de en el fxml. Necesario para listas
             Parent root = loader.load();
             Scene mainScreen = new Scene(root);
+            mainScreen.setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent keyEvent) {
+                    shortcuts(keyEvent);
+                }
+            });
             stage.setScene(mainScreen);
 
             fillLists();
@@ -52,27 +60,42 @@ public class ControlMainScreen extends Application {
         }
     }
 
+    /**
+     * Atajos de teclado
+     * @param keyEvent
+     */
+    private void shortcuts(KeyEvent keyEvent) {
+        switch (keyEvent.getCode()){
+            case F -> abrirVentana(new ControlBuscar());
+            case B -> abrirVentana(new ControlBuscar());
+            case A -> abrirVentanaAdd();
+            case ESCAPE -> stage.close();
+        }
+    }
+
     private void funcionamientoButtons() {
-        btnVentanaAdd.setOnAction(actionEvent -> {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../vista/Add.fxml"));
-            Parent root;
-            try {
-                root = loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return;
-            }
-
-            ControlAdd controlAdd = loader.getController();
-            controlAdd.setMainScreen(this);
-
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        });
+        btnVentanaAdd.setOnAction(actionEvent -> abrirVentanaAdd());
         btnVentanaBuscar.setOnAction(actionEvent -> {
             abrirVentana(new ControlBuscar());
         });
+    }
+
+    private void abrirVentanaAdd() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../vista/Add.fxml"));
+        Parent root;
+        try {
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        ControlAdd controlAdd = loader.getController();
+        controlAdd.setMainScreen(this);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     private void abrirVentana(Application window) {
@@ -83,6 +106,11 @@ public class ControlMainScreen extends Application {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Método que llena las listas de la vista con los datos de la BBDD
+     */
+
 
     public void fillLists() {
         Platform.runLater(() -> listaAutores.setItems(ControlBBDD.generarLista(Autor.class)));
@@ -106,6 +134,10 @@ public class ControlMainScreen extends Application {
         }
     }
 
+    /**
+     * Método para crear y mostrar una ventana de detalles para un objeto seleccionado por el usuario
+     * @param selectedItem
+     */
     private void showDetailsWindow(Object selectedItem) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/detalles.fxml"));
@@ -124,12 +156,11 @@ public class ControlMainScreen extends Application {
         }
     }
 
+    /**
+     * Al seleccionar un objeto de una de las listas, se abre una ventana de detalles.
+     * @param seleccion
+     */
     private void handleItemSelection(Object seleccion) {
         showDetailsWindow(seleccion);
-    }
-
-    private void showDetailsWindow(Autor seleccion) {
-    }
-    private void showDetailsWindow(Libro seleccion) {
     }
 }

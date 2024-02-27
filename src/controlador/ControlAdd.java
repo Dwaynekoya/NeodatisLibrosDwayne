@@ -140,7 +140,9 @@ public class ControlAdd extends Application {
 //        fillCombobox();
     }
 
-
+    /**
+     * Llena el combobox de la vista para añadir libros con los autores presentes en la BBDD
+     */
     @FXML
     private void fillCombobox() {
         Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservableAutores()));

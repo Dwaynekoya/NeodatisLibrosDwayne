@@ -72,6 +72,11 @@ public class ControlDetalles extends Application {
         stage.setScene(new Scene(root));
 //        Platform.runLater(()->fillDetalles());
     }
+
+    /**
+     * Método para mostrar detalles de un objeto Libro
+     * @param libro
+     */
     private void mostrarDetalles(Libro libro) {
         txtTitulo.setText(libro.getNombre());
         txtGenero.setText(libro.getGenero());
@@ -80,6 +85,11 @@ public class ControlDetalles extends Application {
         comboboxAutor.getSelectionModel().select(libro.getAutor());
         Platform.runLater(()-> comboboxAutor.setItems(ControlBBDD.listaObservableAutores()));
     }
+
+    /**
+     * Método para mostrar detalles de un objeto Autot¡r
+     * @param autor
+     */
 
     private void mostrarDetalles(Autor autor) {
         txtNombre.setText(autor.getNombre());
@@ -103,6 +113,11 @@ public class ControlDetalles extends Application {
         }
     }
 
+    /**
+     * Método que muestra una nueva ventana de detalles. Usada para ver libros de un autor
+     * @param selectedItem
+     */
+
     private void showDetailsWindow(Object selectedItem) {
         if (this.detalles!=null) return;
         try {
@@ -121,6 +136,13 @@ public class ControlDetalles extends Application {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Método para asociar a esta vista el objeto del que se mostrarán los valores
+     * @param selectedItem
+     * @param mainScreen
+     */
+
     public void setDetails(Object selectedItem, ControlMainScreen mainScreen) {
         this.mainScreen=mainScreen;
         this.selectedItem=selectedItem;
@@ -135,6 +157,13 @@ public class ControlDetalles extends Application {
             addModificationListenersAutor();
         }
     }
+
+    /**
+     * Este método es usado cuando la ventana de detalles es creada desde otra ventana de detalles
+     * @param selectedItem
+     * @param mainScreen
+     * @param detalles
+     */
     public void setDetails(Object selectedItem, ControlMainScreen mainScreen, ControlDetalles detalles) {
         this.mainScreen=mainScreen;
         this.selectedItem=selectedItem;
@@ -151,6 +180,9 @@ public class ControlDetalles extends Application {
         }
     }
 
+    /**
+     * Listeners usados para comprobar que se ha cambiado o no alguna de las propiedades. (Clase Autor)
+     */
     private void addModificationListenersAutor() {
         txtNombre.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.equals(((Autor)selectedItem).getNombre())) {
@@ -168,6 +200,10 @@ public class ControlDetalles extends Application {
             }
         });
     }
+
+    /**
+     * Listeners usados para comprobar que se ha cambiado o no alguna de las propiedades. (Clase Libro)
+     */
     private void addModificationListenersLibro() {
         txtTitulo.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.equals(((Libro)selectedItem).getNombre())) {
@@ -218,6 +254,12 @@ public class ControlDetalles extends Application {
         ControlBBDD.modificar(selectedItem);
         cerrarVentana(actionEvent);
     }
+
+    /**
+     * Método que comprueba que se quiere eliminar un objeto de la base de datos.
+     * Si el objeto es un Autor, comprueba que no haya libros bajo su nombre (no se permite su borrado)
+     * @param actionEvent
+     */
     public void eliminar(ActionEvent actionEvent){
         labelProhibido.setVisible(false);
         if (selectedItem instanceof Autor){
@@ -225,7 +267,8 @@ public class ControlDetalles extends Application {
             criterios.put("autor.nombre", ((Autor) selectedItem).getNombre());
             criterios.put("autor.apellidos", ((Autor) selectedItem).getApellidos());
             Objects libros = ControlBBDD.busquedaCompleja(Libro.class, criterios);
-            if (libros!=null || libros.hasNext()){
+            if (libros!=null){
+                //label que muestra que no puedes borrar un autor que tenga libros atribuidos
                 labelProhibido.setVisible(true);
                 return;
             }

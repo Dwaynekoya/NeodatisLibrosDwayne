@@ -50,6 +50,10 @@ public class ControlLogin extends Application {
         }
     }
 
+    /**
+     * Método para lanzar la ventana principal.
+     * @param actionEvent
+     */
     private void openMainWindow(ActionEvent actionEvent) {
         try {
             new ControlMainScreen().start(new Stage());
@@ -94,7 +98,7 @@ public class ControlLogin extends Application {
         stage.setTitle("Gestión editorial");
         stage.setResizable(false);
         stage.show();
-        stage.setOnCloseRequest(windowEvent -> ControlBBDD.cerrarBBDD());
+        stage.setOnCloseRequest(windowEvent -> ControlBBDD.cerrarBBDD()); //si cerramos esta vista, se cierra la BBDD
     }
 
     private void launchLogin(Stage stage) {

@@ -52,7 +52,7 @@ public class ControlLogin extends Application {
 
     /**
      * Método para lanzar la ventana principal.
-     * @param actionEvent
+     * @param actionEvent -> evento del botón
      */
     private void openMainWindow(ActionEvent actionEvent) {
         try {
@@ -65,7 +65,7 @@ public class ControlLogin extends Application {
     }
     /**
      * Guarda un objeto Usuario en la base de datos usuarios.ND
-     * @param actionEvent
+     * @param actionEvent -> evento del botón
      */
     public void crearUser(ActionEvent actionEvent) {
         if (!recogerDatos()){
@@ -101,6 +101,10 @@ public class ControlLogin extends Application {
         stage.setOnCloseRequest(windowEvent -> ControlBBDD.cerrarBBDD()); //si cerramos esta vista, se cierra la BBDD
     }
 
+    /**
+     * Método que asocia la vista xml a la clase controlador
+     * @param stage-> ventana a mostrar
+     */
     private void launchLogin(Stage stage) {
         Parent root;
         try {

@@ -28,7 +28,11 @@ public class ControlMainScreen extends Application {
     private Button btnVentanaBuscar;
     private Stage stage;
 
-
+    /**
+     * En el método llamado para iniciar la ventana establecemos título, operación de cerrado y llamamos a launchMain()
+     *  Mostramos el stage como ultimo paso.
+     * @param primaryStage -> Ventana que mostramos
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.stage = primaryStage;
@@ -38,6 +42,9 @@ public class ControlMainScreen extends Application {
         stage.show();
     }
 
+    /**
+     * Asociación de xml al controlador, listeners de teclado y control del funcionamiento de listas y botones.
+     */
     private void launchMain() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/mainscreen.fxml"));
@@ -62,7 +69,7 @@ public class ControlMainScreen extends Application {
 
     /**
      * Atajos de teclado
-     * @param keyEvent
+     * @param keyEvent -> tecla pulsada
      */
     private void shortcuts(KeyEvent keyEvent) {
         switch (keyEvent.getCode()){
@@ -73,6 +80,9 @@ public class ControlMainScreen extends Application {
         }
     }
 
+    /**
+     * Añade el funcionamiento a los botones que abren ventanas.
+     */
     private void funcionamientoButtons() {
         btnVentanaAdd.setOnAction(actionEvent -> abrirVentanaAdd());
         btnVentanaBuscar.setOnAction(actionEvent -> {
@@ -80,6 +90,9 @@ public class ControlMainScreen extends Application {
         });
     }
 
+    /**
+     * Lanza una ventana Add. Incluye la asociación de la vista xml a la clase controlador.
+     */
     private void abrirVentanaAdd() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../vista/Add.fxml"));
         Parent root;
@@ -98,6 +111,10 @@ public class ControlMainScreen extends Application {
         stage.show();
     }
 
+    /**
+     * Lanza una ventana.
+     * @param window-> Ventana a lanzar, siempre es de tipo ControlBuscar
+     */
     private void abrirVentana(Application window) {
         try {
             window.start(new Stage());
@@ -111,7 +128,6 @@ public class ControlMainScreen extends Application {
      * Método que llena las listas de la vista con los datos de la BBDD
      */
 
-
     public void fillLists() {
         Platform.runLater(() -> listaAutores.setItems(ControlBBDD.generarLista(Autor.class)));
         Platform.runLater(() -> listaLibros.setItems(ControlBBDD.generarLista(Libro.class)));
@@ -120,6 +136,9 @@ public class ControlMainScreen extends Application {
         listaLibros.setOnMouseClicked(event -> handleLibroSelection());
     }
 
+    /**
+     * Método que toma el libro seleccionado de la lista asociandolo a una variable
+     */
     private void handleLibroSelection() {
         Libro selectedLibro = (Libro) listaLibros.getSelectionModel().getSelectedItem();
         if (selectedLibro != null) {
@@ -127,24 +146,26 @@ public class ControlMainScreen extends Application {
         }
     }
 
+    /**
+     * Método que toma el autor seleccionado de la lista asociandolo a una variable
+     */
     private void handleAutorSelection() {
         Autor selectedAutor = listaAutores.getSelectionModel().getSelectedItem();
         if (selectedAutor != null) {
             handleItemSelection(selectedAutor);
         }
     }
-
     /**
      * Método para crear y mostrar una ventana de detalles para un objeto seleccionado por el usuario
-     * @param selectedItem
+     * @param seleccion -> Objeto seleccionado por el usuario
      */
-    private void showDetailsWindow(Object selectedItem) {
+    private void handleItemSelection(Object seleccion) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/detalles.fxml"));
             Scene scene = new Scene(loader.load());
 
             ControlDetalles detailsController = loader.getController();
-            detailsController.setDetails(selectedItem, this);
+            detailsController.setDetails(seleccion, this);
 
             Stage detailsStage = new Stage();
             detailsStage.initModality(Modality.APPLICATION_MODAL);
@@ -154,13 +175,5 @@ public class ControlMainScreen extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Al seleccionar un objeto de una de las listas, se abre una ventana de detalles.
-     * @param seleccion
-     */
-    private void handleItemSelection(Object seleccion) {
-        showDetailsWindow(seleccion);
     }
 }

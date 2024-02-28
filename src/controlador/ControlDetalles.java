@@ -75,7 +75,7 @@ public class ControlDetalles extends Application {
 
     /**
      * Método para mostrar detalles de un objeto Libro
-     * @param libro
+     * @param libro -> libro que se recibió para mostrar de la ventana principal
      */
     private void mostrarDetalles(Libro libro) {
         txtTitulo.setText(libro.getNombre());
@@ -87,8 +87,8 @@ public class ControlDetalles extends Application {
     }
 
     /**
-     * Método para mostrar detalles de un objeto Autot¡r
-     * @param autor
+     * Método para mostrar detalles de un objeto Autor
+     * @param autor -> autor que se recibió para mostrar de la ventana principal
      */
 
     private void mostrarDetalles(Autor autor) {
@@ -106,6 +106,9 @@ public class ControlDetalles extends Application {
         listaLibros.setOnMouseClicked(mouseEvent -> handleLibroSelection());
     }
 
+    /**
+     * Si seleccionamos un libro de la lista de libros (vista de un autor), generamos una nueva vista de detalles del libro
+     */
     private void handleLibroSelection() {
         Libro selectedLibro = (Libro) listaLibros.getSelectionModel().getSelectedItem();
         if (selectedLibro != null) {
@@ -115,7 +118,7 @@ public class ControlDetalles extends Application {
 
     /**
      * Método que muestra una nueva ventana de detalles. Usada para ver libros de un autor
-     * @param selectedItem
+     * @param selectedItem -> objeto del que crear una vista Detalles
      */
 
     private void showDetailsWindow(Object selectedItem) {
@@ -139,8 +142,8 @@ public class ControlDetalles extends Application {
 
     /**
      * Método para asociar a esta vista el objeto del que se mostrarán los valores
-     * @param selectedItem
-     * @param mainScreen
+     * @param selectedItem -> objeto a mostrar
+     * @param mainScreen -> Pantalla principal de la aplicación
      */
 
     public void setDetails(Object selectedItem, ControlMainScreen mainScreen) {
@@ -160,9 +163,9 @@ public class ControlDetalles extends Application {
 
     /**
      * Este método es usado cuando la ventana de detalles es creada desde otra ventana de detalles
-     * @param selectedItem
-     * @param mainScreen
-     * @param detalles
+     * @param selectedItem -> objeto a mostrar
+     * @param mainScreen -> Pantalla principal de la aplicación
+     * @param detalles -> Ventana desde la cual fue creada
      */
     public void setDetails(Object selectedItem, ControlMainScreen mainScreen, ControlDetalles detalles) {
         this.mainScreen=mainScreen;
@@ -242,13 +245,16 @@ public class ControlDetalles extends Application {
 
     /**
      * Cierra la ventana cuando se pulsa el botón adecuado
-     * @param actionEvent
+     * @param actionEvent -> evento del botón
      */
     public void cerrarVentana(ActionEvent actionEvent) {
         this.mainScreen.fillLists();
         ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
     }
-
+    /**
+     * Modifica el objeto usando método de ControlBBDD cuando se pulsa el botón
+     * @param actionEvent -> evento del botón
+     */
     public void modificar(ActionEvent actionEvent) {
         labelProhibido.setVisible(false);
         ControlBBDD.modificar(selectedItem);

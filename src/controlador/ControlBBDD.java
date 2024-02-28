@@ -47,7 +47,7 @@ public class ControlBBDD {
      * @param campo: columna de la tabla
      * @param valor: valor que buscar
      * @param clase: clase del objeto, "tabla"
-     * @return
+     * @return lista org.neodatis.odb.Objects con los objetos encontrados
      */
     public static Objects buscar(String campo, Object valor, Class clase){
         Objects resultado;
@@ -71,7 +71,7 @@ public class ControlBBDD {
      * Busqueda en la base de datos usando una consulta And
      * @param clase: Clase a la que pertenecen los objetos de la búsqueda
      * @param criterios: Mapa donde cada clave es un campo o columna de la tabla y el valor es el valor para comparar
-     * @return
+     * @return lista org.neodatis.odb.Objects con los objetos encontrados
      */
     public static Objects busquedaCompleja(Class clase, Map<String, Object> criterios) {
         Objects resultado;
@@ -118,7 +118,7 @@ public class ControlBBDD {
     /**
      * Método que añade un objeto a la base de datos. Comprueba que el objeto no haya sido introducido anteriormente
      * @param object: objeto para guardar, puede pertenecer a la clase Libro, Usuario o Autor
-     * @return
+     * @return true si el objeto fue insertado correctamente. false si el objeto ya está presente en la BBDD
      */
     public static boolean addObject(Object object) {
         Objects duplicado = null;
@@ -167,13 +167,18 @@ public class ControlBBDD {
 
     /**
      * edita el objeto presente en la base de datos.
-     * @param selectedItem
+     * @param selectedItem -> objeto que fue seleccionado en la vista para su edición.
      */
     public static void modificar(Object selectedItem) {
         odb.store(selectedItem);
         odb.commit();
     }
 
+    /**
+     * Convierte la lista devuelta por la búsqueda en la BBDD a una lista observable.
+     * (En caso de problemas con el método más genérico)
+     * @return ObservableList con los autores de la BBDD
+     */
     public static ObservableList listaObservableAutores() {
         Objects<Autor> items = ControlBBDD.buscar(null, null, Autor.class);
         assert items != null;
@@ -196,6 +201,10 @@ public class ControlBBDD {
             System.out.printf("%s, %s %n", autor.getApellidos(), autor.getNombre());
         }
     }
+
+    /**
+     * Datos de prueba de la BBDD
+     */
 
     public static void insertarDatosPrueba() throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
@@ -243,8 +252,8 @@ public class ControlBBDD {
 
     /**
      * Método que comprueba la fecha y hora de creación de un archivo.
-     * @param path
-     * @return
+     * @param path -> ruta del archivo
+     * @return fecha de creación en milisegundos
      */
     private static long getFileCreationTime(Path path) {
         try {

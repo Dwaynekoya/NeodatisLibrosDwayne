@@ -10,8 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
 import modelo.Autor;
 import modelo.Libro;
 
@@ -56,12 +54,12 @@ public class ControlAdd extends Application {
     /**
      * Crea objeto de tipo Autor si todos los campos están llenos
      * Inserta el objeto en la base de datos usando la clase ControlBBDD
-     * @param actionEvent
+     * @param actionEvent -> evento generado por el botón
      */
     public void addAutor(ActionEvent actionEvent) {
         String nombre = txtNombre.getText();
         String apellidos = txtApellidos.getText();
-        if (checkVacio(new String[]{nombre, apellidos})){
+        if (checkDatosCompletos(new String[]{nombre, apellidos})){
             Autor autor = new Autor(nombre,apellidos, checkActivo.isSelected());
             boolean added = ControlBBDD.addObject(autor);
             //listaAutores.refresh();
@@ -75,11 +73,11 @@ public class ControlAdd extends Application {
     }
 
     /**
-     * Comprueba que no haya campos vacíos.Devuelve falso si falla el check (hay campos vacios)
-     * @param campos
-     * @return
+     * Comprueba que no haya campos vacíos
+     * @param campos-> Strings con los valores de los campos de texto de la vista.
+     * @return -> false si hay campos vacíos. True si todos los campos fueron rellenados.
      */
-    private boolean checkVacio(String[] campos) {
+    private boolean checkDatosCompletos(String[] campos) {
         for (String campo: campos){
             if (campo.isEmpty()) return false;
         }
@@ -89,13 +87,13 @@ public class ControlAdd extends Application {
     /**
      * Crea objeto de tipo Libro si todos los campos están llenos
      * Inserta el objeto en la base de datos usando la clase ControlBBDD
-     * @param actionEvent
+     * @param actionEvent -> evento generado por el botón
      */
     public void addLibro(ActionEvent actionEvent) {
         String titulo = txtTitulo.getText();
         String genero = txtGenero.getText();
         String sinopsis = txtSinopsis.getText();
-        if (checkVacio(new String[]{titulo,genero,sinopsis})){
+        if (checkDatosCompletos(new String[]{titulo,genero,sinopsis})){
             Date  fechaLanzamiento;
             LocalDate localDate = datePicker.getValue();
             Autor selectedAutor = (Autor) comboboxAutor.getSelectionModel().getSelectedItem();
@@ -116,7 +114,7 @@ public class ControlAdd extends Application {
     }
     /**
      * Cierra la ventana cuando se pulsa el botón adecuado
-     * @param actionEvent
+     * @param actionEvent-> evento generado por el botón
      */
     public void cerrarVentana(ActionEvent actionEvent) {
         ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
@@ -124,7 +122,7 @@ public class ControlAdd extends Application {
 
     /**
      * Asigna la vista fxml al Stage creando una escena
-     * @param stage
+     * @param stage -> ventana a la que se le asocia la nueva escena
      */
     private void launchAdd(Stage stage) {
         Parent root;
